@@ -1,7 +1,7 @@
 
 #include "../include.h"
 
-#define PIN	PD5
+#define PIN	PC4
 
 int main(void)
 {

@@ -56,6 +56,17 @@ void ADCx_InitSingle(ADC_t* adc)
 	// wake-up ADC
 	ADCx_Enable(adc);
 	WaitMs(1);
+
+	// select calibration voltage
+	ADC1_CalVol(ADC_CAL_24);
+
+	// reset calibration
+	ADC1_RstCalibStart();
+	while (ADC1_RstCalibBusy()) {}
+
+	// start calibration
+	ADC1_CalibStart();
+	while (ADC1_CalibBusy()) {}
 }
 
 // Get single conversion (chan = channel 0..9)

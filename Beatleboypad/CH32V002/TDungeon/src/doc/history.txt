@@ -1,0 +1,114 @@
+History and open points list of TinyDungeon
+
+already achieved:
+* made walls solid
+* copy level from flash to RAM
+* set Level size to fixed 16x16. There will be no stairs (lack of flash for more images or levels)
+* mirror walls between odd and even cells to produce a "walking" effect
+* added skeleton and beholder bitmap
+* very plain draw function for non-wall-objects
+* always respect solid bit
+* added bitmap scaling
+* added scripted events (levers switching doors, ...)
+* code works on Arduino UNO and MEGA2560, too
+* enhanced bitmap scaling to work with bitmap heights (in bytes) which are not a power of 2
+* cropped the wall bitmaps to the required size saving 960 bytes
+* added compass
+* added open chest image
+* added special treatment for item groups like chests and monsters
+* removed alphabet except NESW for compass (to save flash)
+* placed a compass in a chest
+* added flash effect for teleporters (and spinners?)
+* added events when player steps on a new field (-> teleporter, spinner)
+* added a fountain (still without function)
+* added a spinner
+* added teleporter
+* added screenshot via serial port
+* added sound support for Arduino Uno R3 and Mega 2560
+* every decent dungeon needs rats!
+* player movement control now has a fast running loop. This will be used to create "random" numbers by counting fast
+* new item: <Amulet of True Sight> removes all fake walls from the game
+* new item <Ring of Orientation> causes the screen to flash if the player is teleported or spun
+* placed Amulet of True Sight in a chest
+* placed Ring of Orientation in a chest
+* monsters have stats, so the can be defeated! The monsters' stats are saved in a global table in RAM (EEPROM if RAM gets too low)
+* added a simple combat system`
+* the player can die!
+* added a death "screen" (dark dungeon screen and skeleton displayed in the status panel)
+* combat "animations": monster gets inverted on a hit, players hitpoints are inverted on a hit
+* changed dice rolling to use a free running timer (at least on ATtiny85)
+* add icons for magic items (Shield of Faith, Ring of Orientation, Sword of Destiny , Amulet of True Sight)
+* Check/Change: 
+  - player movement control has to have a fast running loop. This will be used to create "random" numbers by counting fast
+  [- required for walking monsters, too]
+  [- and for healing over time]
+* "Invented" a combat system:
+  - who attacks first? depending on monster
+  - always the player? nope
+  - can the player upgrade his/her weapon? yes!
+  - can the player flee? yes!
+  - defeated monsters can "drop" chests? no, but loot may be added to the player's items
+* added a second graphic set for the wall bitmaps (rough rounded stones) for a nicer look
+* removed numbers characters, player hitpoints are visualized as a bar
+  - enabled wider icons for the player's gear
+  - saved a lot of flash bytes and RAM
+* monsters can attack first
+* fixed problem with left/right walls in the distance
+* changed compass from letters to arrows
+* added mimic, reusing the chest bitmap
+
+
+next steps:
+* monsters should attack player on approaching (if they attack first)
+
+Combat System
+  * are there walking monsters? nope
+  * monsters should be able to attack the player if he/she comes close (should the player automatically turn to the threat?)
+  * add more monster(s)
+  * monster attacks should play a sound
+
+Game Logic
+  * define a goal (defeat the boss (beholder?) )
+  * what happens when the player wins? - Just some lame text message?
+  * can the player "break" the dungeon [i.e. get in a deadlock - probably yes :)]
+  * Should the player be healed by fountains?
+    - how?
+    - "using" from the distance
+    - walking over it?
+    - how often?
+    - change fountain to water basin placed on a wall?
+  * require key to open chests/doors - use same key type for both? yes
+
+Graphics Engine
+  * extend object drawing to full field of view?
+ [* add stairs up/down]
+  * add treasure
+  * ...
+  * add fun!
+
+perhaps:
+? use just left walls and mirror them for right:
+  - saves 384 bytes + 24 empty bytes in the center
+  - and should be quite easy, but would kill the important "movement" effect
+  or
+  - or use mirror table (nibble based?)
+  - estimation: will save 300 bytes?
+
+  - create darkness effect (disable every 2nd pixel) when no torch is lit?  
+
+Final Steps:
+? add floor graphics
+? use only one bitmap for all front walls using downscaling <- is this really still necessary, it's just 576 bytes?! 
+
+
+The Sky is the Limit:
+---------------------
+* add a second level, that would require 
+  - 256 bytes for the level 
+  - 140 bytes for interactions
+  - 60 bytes for monsters
+  - redesign monster storage:
+    + separate hit points from monster properties (to save RAM)
+    + save level to EEPROM when swapping between the levels (this would consume the whole 512 bytes of EEPROM)
+
+* alternative: save game to EEPROM?

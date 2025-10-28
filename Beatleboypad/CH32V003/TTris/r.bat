@@ -1,0 +1,3 @@
+@echo off
+rem Reset device...
+..\..\..\_r1.bat

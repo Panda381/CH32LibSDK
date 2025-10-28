@@ -11,7 +11,7 @@
 // SPI1 - "Video" output via PC6 (pin 5), MOSI base mapping (PC1:CS, PC5:SCK, PC7:MISO, PC6:MOSI)
 // VSYNC, output via PC4 (pin 4)
 // Timer 2, channel 2 - HSYNC, output via PC7 (pin 6), TIM2 mapping 3 (PC1:CH1/ETR, PC7:CH2, PD6:CH3/CH1N, PD5:CH4/CH2N)
-// Timer 2, channel 1 - interrup to draw image line
+// Timer 2, channel 1 - interrupt to draw image line
 //
 // Videomode 640x480/60Hz timing
 // -----------------------------
@@ -112,7 +112,7 @@ extern "C" {
 #elif VMODE == 7
 #define WIDTH		32		// width in characters
 #define HEIGHT		24		// height in text rows
-#define WIDTHBYTE	WIDTH		// width in bytes (= 40)
+#define WIDTHBYTE	WIDTH		// width in bytes (= 32)
 #define FRAMESIZE	(WIDTHBYTE*HEIGHT) // size of frame buffer in bytes (= 32*24 = 768 bytes)
 #define TEXTWIDTH	WIDTH		// text width in characters (= 32)
 #define TEXTHEIGHT	HEIGHT		// text height in rows (= 24; 1 character = 8x8 pixels)

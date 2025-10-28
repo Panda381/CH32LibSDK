@@ -1,0 +1,48 @@
+
+Longest Journey - a teleporter teleports the player two cells back
+---------------
+
+W W W W W
+.<<<. . .   - can be disabled by a switch
+W W W W W
+
+or with a detour
+
+W W W W W W W
+. . .<<<. . .   - or avoided by a hidden path
+W W f W f W W
+  W . . . W
+  W W W W W  
+
+
+Death Snare with teleporter (s.a.) and spinner(s)
+-----------
+
+W W W W W W W
+W . . . . . W
+W . W W W . W 
+W . W $ W . W
+W . W . . . W
+W . W W W W W
+
+
+
+Great Hall
+----------
+
+W W W W W W W
+W . . . . . W 
+W . W . W . W W
+W . . . . . . D
+W . W . W . w W
+W . . . . . W 
+W W W W W W W 
+
+
+Materializing Chest
+-------------------
+if a button is pressed, a chest materializes out of nowhere
+
+Materializing Monster
+---------------------
+Of course the same could be true for a monster

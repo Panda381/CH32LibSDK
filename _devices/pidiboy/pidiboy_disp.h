@@ -38,7 +38,7 @@ extern u8 FrameBuf[FRAMESIZE];		// display graphics buffer
 // start I2C communication
 void DispI2C_Start(void);
 
-// stop I2C communcation
+// stop I2C communication
 void DispI2C_Stop(void);
 
 // write a byte over I2C

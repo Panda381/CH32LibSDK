@@ -90,7 +90,7 @@ void DispWindow(u16 x1, u16 x2, u16 y1, u16 y2);
 // start simulated I2C communication
 INLINE void DispI2C_Start(void) {}
 
-// stop simulated I2C communcation
+// stop simulated I2C communication
 INLINE void DispI2C_Stop(void) {}
 
 // Display select simulated I2C page

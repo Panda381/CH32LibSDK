@@ -1,0 +1,41 @@
+Optimization ideas
+
+<flash usage>
+* rejected: store bitmaps in unused parts of other bitmaps (walls, status panel) or blank them out (like "Victory" in status panel)
+            - there is no unused space in the bitmpas
+            - zeroing bitmaps in the status panel costs 18 bytes of flash, so the gain would be negligible (21 free pixel bytes), but add unneccessary complexity.
+-> NOPE
+* splitting diagonal walls into single segments could save space
+  - this should work, but requires an additional offset to next line/width for each bitmap (currently 20 bitmaps)
+  - it would be possible to calculate from start and end (but that would require to split all bitmaps into single bitmaps and probably wouldn't save much space)
+  - would kill mirroring left/right!!!
+-> NOPE (because of the walking effect by mirroring the side walls with each step)
+* splitting walls further:
+  - large 88x64 wall in distance 1 could be created from a tile half the width (would save > 300 bytes(!))
+  - done: diagonal walls could be split to make use of reduced height (costs 2 * 9 bytes for more table entries)
+
+<RAM usage>
+* monster stats are stored in RAM, costing MAX_MONSTERS * 6 bytes, currently 54 bytes of RAM (10%!)
+  - keep monsters in flash except the hitpoints value
+  - or copy monsters to EEPROM to save RAM (EEPROM code required)
+
+<graphics>
+* outer left/right walls look bad (the 5 pixels on each side) - should be reworked ;)
+* use darkening effect by dithering - should there be a torch or a lantern (without a torch the whole dungeon would be black, wouldn't it?)?
+* add support for partial line updates to increase frame rate?
+* recreate the bars bitmap, so that it becomes thinner in distance 2 (shift by 1 pixel to the left) -> bitmap size grows to 32x48 (64x48 with mask)
+* let dead monsters sink through the floor instead of simply vanishing or make them spin vertically like the were made out of paper
+
+<convenience>
+* done: automatically place monsters in level during startup
+        - cost is about 24 bytes of code and 1 byte per monster - fine by me...
+
+<memory/convenience>
+* rejected: optionally add reverse functionality for interactions (switches, etc) - not possible, because interactions aren't (and cannot be) stored in RAM!
+
+<performance>
+* rejected: store all visible walls/items in a small array (5x3 bytes) before rendering a frame
+            - failed, only 10-20% performance increase, but 64 bytes more flash and 15 bytes more RAM usage
+* skip drawing the status panel if nothing has changed
+  - requires partial line transfers
+

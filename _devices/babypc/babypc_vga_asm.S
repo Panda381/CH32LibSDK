@@ -855,9 +855,9 @@ TIM2_IRQHandler:
 //  A0-A5, T0-T2 =
 //  RA = return address
 
-	// clear update interrupt flag (Timer 2, channel 1)
+	// clear compare interrupt flag (Timer 2, channel 1)
 	li	a2,TIM2_BASE		// A2 <- Timer 2 base
-	lw	a1,TIM_INTFR_OFF(a2)	// get INTFR register
+	lw	a1,TIM_INTFR_OFF(a2)	// A1 <- get INTFR register
 	lw	a0,TIM_CNT_OFF(a2)	// A0 <- load timer counter
 	andi	a1,a1,~(1<<1)		// clear interrupt flag
 	sw	a1,TIM_INTFR_OFF(a2)	// set INTFR register
@@ -872,9 +872,9 @@ TIM2_IRQHandler:
 	//  cycles due to the varying length of instructions in the main program.
 
 	// >>>>>>>> SETUP
-	//  If you change Timer 2 channel 2 compare value, setup this
+	//  If you change Timer 2 channel 1 compare value, setup this
 	//  correction - select 0 to 7 to minimise display noise.
-#ifdef VMODE_SHIFT	// shift VMODE time correction
+#ifdef VMODE_SHIFT	// custom shift VMODE time correction
 	addi	a0,a0,VMODE_SHIFT	// time correction: select 0 to 7
 #else
 
@@ -1000,7 +1000,7 @@ TIM2_IRQHandler2B:
 #endif
 	bgt	t2,a1,TIM2_IRQHandler3	// not VSYNC, serve back porch
 
-	// start VSYNC pulse (send 0 to PC7)
+	// start VSYNC pulse (send 0 to PC4)
 	sw	a0,GPIO_BCR_OFF(a3)	// send 0 to PC4
 	bne	t2,a1,TIM2_IRQHandler4	// skip if not last line of VSYNC
 
@@ -1030,7 +1030,7 @@ TIM2_IRQHandler2B:
 	li	a4,TIM1_BASE		// A4 <- Timer 1 base
 	bgtz	a0,4f			// valid counter
 
-// The audio output is via PC4 (pin 4), Timer 1 channel 4, mapping 0.
+// The audio output is via PD4 (pin 8), Timer 1 channel 4, mapping 3.
 
 	// request to start new melody
 	la	a3,SoundMelodyNext

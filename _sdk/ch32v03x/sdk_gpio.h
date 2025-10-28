@@ -20,9 +20,15 @@ extern "C" {
 #define GPIO_MODE_OUT		(0+1)	// push-pull output
 #define GPIO_MODE_AF		(8+1)	// alternate function output (I2C automatic open drain)
 
+#define GPIO_MODE_OUT_SLOW	GPIO_MODE_OUT
+#define GPIO_MODE_OUT_FAST	GPIO_MODE_OUT
+#define GPIO_MODE_AF_SLOW	GPIO_MODE_AF
+#define GPIO_MODE_AF_FAST	GPIO_MODE_AF
+#define GPIO_MODE_AFOD		GPIO_MODE_AF
+
 // GPIO port
 typedef struct {
-	io32	CFGLR;		// 0x00: configuration register low (4 bits per pin, combination , B0-B1 speed, 
+	io32	CFGLR;		// 0x00: configuration register low
 	io32	CFGHR;		// 0x04: configuration register high
 	io32	INDR;		// 0x08: input data register (8 or 16 pins)
 	io32	OUTDR;		// 0x0C: output data register (8 or 16 pins; for pull inputs: 0=pull down, 1=pull up)

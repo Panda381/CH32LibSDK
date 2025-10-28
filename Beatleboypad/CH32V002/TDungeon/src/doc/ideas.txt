@@ -1,0 +1,13 @@
+Ideas for improvements
+
+* display damage dealt/received on screen
+  - perhaps comic like with spikes (*POW*)
+  - monster inflicted damage right near the players HP
+  - player inflicted damage central on the dungeon screen
+  - mask required (bitmap is 24x24 -> 144 bytes required )
+  - font is 7x3, 30 bytes required (probably 40 bytes to simplify adressing)
+
+Done
+
++ scale hit points by 2 (again)
++ add version info to panel

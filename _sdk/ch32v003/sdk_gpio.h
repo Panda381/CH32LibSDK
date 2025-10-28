@@ -36,7 +36,7 @@ extern "C" {
 
 // GPIO port
 typedef struct {
-	io32	CFGLR;		// 0x00: configuration register low (4 bits per pin, combination , B0-B1 speed, 
+	io32	CFGLR;		// 0x00: configuration register low
 	io32	res;		// 0x04: ...reserved
 	io32	INDR;		// 0x08: input data register (8 or 16 pins)
 	io32	OUTDR;		// 0x0C: output data register (8 or 16 pins; for pull inputs: 0=pull down, 1=pull up)
@@ -126,6 +126,7 @@ INLINE void GPIOA_Out(int pin, int val) { GPIOx_Out(GPIOA, pin, val); }
 INLINE void GPIOC_Out(int pin, int val) { GPIOx_Out(GPIOC, pin, val); }
 INLINE void GPIOD_Out(int pin, int val) { GPIOx_Out(GPIOD, pin, val); }
 INLINE void GPIO_Out(int gpio, int val) { GPIOx_Out(GPIO_PORT(gpio), GPIO_PIN(gpio), val); }
+INLINE void GPIOx_OutFast(GPIO_t* port, int pin, int val) { GPIOx_Out(port, pin, val); }
 
 // flip GPIO output pin (port = GPIOA..., pin = 0.., gpio = PA0...)
 INLINE void GPIOx_Flip(GPIO_t* port, int pin) { pin = BIT(pin);

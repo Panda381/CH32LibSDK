@@ -1,0 +1,55 @@
+# TINY-TRICK for Tinyjoypad ATTINY85
+<img src="screen 2.png" alt="TINY-Trick" width="200" />  
+**Version**: 2025  
+**Contact Email**: electro_l.i.b@tinyjoypad.com  
+**GitHub Repository**: [TinyJoypad GitHub](https://github.com/phoenixbozo/TinyJoypad/tree/main/TinyJoypad)  
+**Website**: [TinyJoypad](https://WWW.TINYJOYPAD.COM)  
+**Documentation**: [Arduino Collection](https://sites.google.com/view/arduino-collection)
+
+## Description
+
+**TINY-TRICK** is a game designed for the **Tinyjoypad** gaming console, which operates on **ATtiny85** microcontrollers. This project includes the `FastTinyDriver.h` file, a graphics driver optimized for OLED displays based on the SSD1306 controller.
+
+The game's code uses this driver to render graphics on the OLED screen and is also designed to be reusable in other projects that require OLED displays.
+
+**Note**: The compiled version in `.hex` format provided with the source code includes code from the standard Arduino IDE libraries as well as code from the **FastTinyDriver** library.
+
+## Libraries Used
+
+This program utilizes standard Arduino libraries, including:  
+- `avr/io.h`  
+- `util/delay.h`  
+- `avr/pgmspace.h`  
+- `EEPROM.h`  
+
+These libraries facilitate input/output management, delay creation, program memory manipulation, and access to EEPROM memory, ensuring optimal performance of the project.
+
+## License
+
+This code is distributed under the **GNU General Public License version 3 (GPLv3)**. You can redistribute and/or modify it under the terms of this license. No warranty is provided, and you must ensure compliance with the license terms.
+
+You can view the full license at the following link: [GNU GPLv3 License](http://www.gnu.org/licenses/).
+
+## Installation
+
+To program the ATtiny85 microcontroller with this project:
+
+1. **Hardware Setup:**
+   - Use an **Arduino Uno** board configured in **"Arduino as ISP"** mode.
+   - Connect the appropriate pins between the Arduino and the ATtiny85.
+
+2. **Software Setup:**
+   - Open the Arduino IDE.
+   - Load the sketch containing the `TINY SQUEST` code.
+   - Select the correct board type (ATtiny85) and the appropriate programmer (Arduino as ISP).
+   - Upload the code to the ATtiny85.
+
+## Usage
+
+After programming the ATtiny85, you can play the game using the Tinyjoypad console. Make sure the driver is configured correctly to avoid issues if you use this code in other projects.
+
+### IMPORTANT
+
+If you plan to use this code for purposes other than **Tinyjoypad ATtiny85**, it is imperative to remove the `#define TINYJOYPAD_ASM_DRIVER` directive to access the portable version of **FastTinyDriver**. This will ensure the driver functions correctly in other contexts.
+
+For any questions or support requests, feel free to contact me via email.

@@ -24,11 +24,11 @@
 // vector table base address needs to be 1KB aligned in the QingKe V2 microprocessor
 //   Note: Do not use 1KB alignment if you need to save Flash memory,
 //   because GCC for RISC-V also aligns the end of the section to 1KB in this case.
-#if REDUCE_CRT0_SIZE
+//#if REDUCE_CRT0_SIZE
 	.align	2
-#else
-	.align	10
-#endif
+//#else
+//	.align	10
+//#endif
 
 .global _start
 _start:

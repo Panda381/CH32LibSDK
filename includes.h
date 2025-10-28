@@ -30,6 +30,10 @@
 #include "_devices/babypad/_include.h"
 #endif
 
+#if USE_BEATLEBOYPAD
+#include "_devices/beatleboypad/_include.h"
+#endif
+
 #if USE_PIDIBOY
 #include "_devices/pidiboy/_include.h"
 #endif
@@ -44,4 +48,8 @@
 
 #if USE_BABYPC
 #include "_devices/babypc/_include.h"
+#endif
+
+#if USE_PIDIPC
+#include "_devices/pidipc/_include.h"
 #endif

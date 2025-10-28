@@ -6,7 +6,7 @@ extern "C" {
 
 // Slot address and size must be multiply of 256 B.
 #define SLOTNUM		0x0400		// save slot size (hardcoded to 1KB)
-#define SLOTMAX		12		// max. slot index
+#define SLOTMAX		12		// max. slot index (= 1..12, 12 slots)
 #define SLOTALIGN	0x0400		// align slots in memory
 
 #define SLOT13NUM	0x0200		// size of slot 13 (must be aligned to 256 B)

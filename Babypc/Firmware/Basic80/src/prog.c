@@ -360,13 +360,16 @@ void CmdBeep()
 	if (!CheckEnd()) return;
 
 	// minimal frequency 16 Hz, maximal frequency 16 kHz
-	if ((f >= 1600) && (f <= 1600000))
+	if (f > 0) // 0 = silent
 	{
-		// get divider
-		u32 div = (100*1000000 + f/2)/f - 1;
+		if ((f >= 1600) && (f <= 1600000))
+		{
+			// get divider
+			u32 div = (100*1000000 + f/2)/f - 1;
 
-		// play tone
-		PlayTone(div);
+			// play tone
+			PlayTone(div);
+		}
 	}
 
 	// wait

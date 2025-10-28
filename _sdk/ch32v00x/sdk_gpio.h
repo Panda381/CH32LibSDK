@@ -34,7 +34,7 @@ extern "C" {
 
 // GPIO port
 typedef struct {
-	io32	CFGLR;		// 0x00: configuration register low (4 bits per pin, combination , B0-B1 speed, 
+	io32	CFGLR;		// 0x00: configuration register low
 	io32	res;		// 0x04: ...reserved
 	io32	INDR;		// 0x08: input data register (8 or 16 pins)
 	io32	OUTDR;		// 0x0C: output data register (8 or 16 pins; for pull inputs: 0=pull down, 1=pull up)
@@ -218,7 +218,7 @@ INLINE void GPIO_Remap_I2C1(int map) { GPIO_Remap1_3b(3, map); }
 //	9 ... PA0:TX, PC4:RX, PD5:CTS, PD4:RTS
 INLINE void GPIO_Remap_USART1(int map) { GPIO_Remap1_4b(6, map); }
 
-// Remap USART2 (default 0)
+// Remap USART2 (default 0) (only CH32V005-CH32V007)
 //	0 ... PA7:TX, PB3:RX, PA4:CTS, PA5:RTS
 //	1 ... PA4:TX, PA5:RX, PA7:CTS, PB3:RTS
 //	2 ... PA2:TX, PA3:RX, PA0:CTS, PA1:RTS

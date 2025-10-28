@@ -358,10 +358,14 @@ else
 ifeq (${DEVCLASS},pidiboy)
 	@${CH32LIBSDK_TOOLS_DIR}/rm -f ./$(TARGET).hex ./$(TARGET).lst ./$(TARGET).map ./$(TARGET).sym ./$(TARGET).siz
 else
+ifeq (${DEVCLASS},pidipc)
+	@${CH32LIBSDK_TOOLS_DIR}/rm -f ./$(TARGET).hex ./$(TARGET).lst ./$(TARGET).map ./$(TARGET).sym ./$(TARGET).siz
+else
 ifeq (${DEVCLASS},pidipad)
 	@${CH32LIBSDK_TOOLS_DIR}/rm -f ./$(TARGET).hex ./$(TARGET).lst ./$(TARGET).map ./$(TARGET).sym ./$(TARGET).siz
 else
 	@${CH32LIBSDK_TOOLS_DIR}/rm -f ./$(TARGET).lst ./$(TARGET).map ./$(TARGET).sym ./$(TARGET).siz
+endif
 endif
 endif
 endif
@@ -399,6 +403,12 @@ siz: ./$(TARGET).siz
 ./$(TARGET).bin: ./$(TARGET).elf
 	@echo     bin		 $@
 	@$(OC) -O binary $< $@
+ifeq (${DEVCLASS},pidipc)
+ifneq (${NOBOOT},1)
+	@echo     crc		 $@
+	@${CH32LIBSDK_LOADER_DIR}/PidiPC/loadercrc/LoaderCrc $@ $(TARGET).elf
+endif
+endif
 ifeq (${DEVCLASS},pidipad)
 ifneq (${NOBOOT},1)
 	@echo     crc		 $@

@@ -11,7 +11,7 @@
 // SPI1 - "Video" output via PC6 (pin 5), MOSI base mapping (PC1:CS, PC5:SCK, PC7:MISO, PC6:MOSI)
 // VSYNC, output via PC7 (pin 6)
 // Timer 2, channel 1 - HSYNC, output via PD4 (pin 8), TIM2 base mapping (PD4:CH1/ETR, PD3:CH2, PC0:CH3/CH1N, PD7:CH4/CH2N)
-// Timer 2, channel 2 - interrup to draw image line
+// Timer 2, channel 2 - interrupt to draw image line
 //
 // Videomode 640x480/60Hz timing
 // -----------------------------

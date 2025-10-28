@@ -1,6 +1,6 @@
 CH32LibSDK - SDK library for low-end CH32 RISC-V microcontrollers
 =================================================================
-Pre-alpha version 0.30, under development.
+Pre-alpha version 0.31, under development.
 
 Copyright (c) 2025 Miroslav Nemecek
 
@@ -27,6 +27,69 @@ How to compile on Windows, using command line:
   For the SD card version of the console, simply upload the program to the
   SD card and load it into the processor using the boot loader.
 - Clear compilation using d.bat.
+
+
+BeatleBoyPad (BeatleBoy, BeatlePad)
+-----------------------------------
+BeatleBoyPad is dual console with interchangeable ROM cartridges. It consists
+of two consoles. The first console, BeatleBoy, contains 128x64 pixel black and
+white OLED I2C display with SSD1306 controller, built-in speaker and 6 buttons
+(4 directional arrows and A and B buttons). The console is powered by CR2032
+battery. The second console, BeatlePad, has black and white output to VGA
+monitor and connector for external speaker. Cartridge with program contains
+cheap Chinese processor CH32V002J4M6, CH32V003J4M6 or CH32V006F8P6. Note: for
+processor V006 different cartridge wiring than for processors V002 and V003 is
+used.
+
+The cartridges are common to both consoles. The processor in the cartridge
+distinguishes between the two consoles based on the voltage and switches to
+the appropriate mode accordingly. Due to the console's auto-detection, it is
+therefore necessary to maintain the power supply used - the BeatleBoy console
+is powered by a 3V battery, while the BeatlePad console is powered by a 5V
+external source. In addition to detecting the supply voltage, the processor
+in the BeatlePad console also detects the connection of a VGA cable. The
+program in the console will only start after connecting a VGA monitor. This
+is so that the cartridge can be reprogrammed in the programmer, as the VGA
+console also uses programming pin.
+
+There are 25 games available for the console. All prepared games can be
+programmed into all types of cartridges - with V002, V003, or V006 processors.
+The V002 processor variant has more RAM available than the V003 processor, and
+the output to the VGA monitor is via SPI controller, which allows the use of
+higher video mode resolutions (this is not used in the prepared games). The
+V006 processor has more RAM than the V002 processor. However, unless required
+by the software, it is recommended to use the CH32V003J4M6 processor. Although
+this is an older type of processor, its advantage is higher oscillator
+stability and therefore less noise in the VGA image.
+
+When constructing the device, it is necessary to use resistors with 1%
+accuracy, otherwise button presses may be detected incorrectly. The
+brightness of the OLED display is kept low to minimize battery consumption.
+The current voltage of the CR2032 battery is displayed when most programs
+start. The measurement is performed using the internal reference of the
+processor, and therefore the displayed value may vary by up to 10% and
+should therefore be taken as a guide only. Pay attention to the pin layout
+of the display - there are usually two versions, with the pin order
+VCC-GND-SCL-SDA or GND-VDD-SCL-SDA. Both variants are available on the
+printed circuit board (alternatively, the display can be connected
+interchangeably via a pin header). The OLED display is used here in an
+inverted position compared to other consoles - the image rotation is defined
+in the display initialization sequence.
+
+An internal HSI RC oscillator is used for VGA image output. Its frequency is
+not stabilized by a crystal, so slight signal timing deviations and image
+noise must be expected. The V003 processor has slightly lower image noise than
+the V002 and V006 processors. Some VGA monitors may not display the image due
+to the low quality of the image signal timing.
+
+Programs can be loaded into the cartridge using the WCH-LinkE programmer
+(available, for example, here:
+https://pajenicko.cz/usb-programator-a-debug-adapter-wch-link). Pin number 4
+on the cartridge is left as an option for reprogramming processors requiring
+2-wire programming (SWDIO+SWCLK, e.g., CH32X035). Currently, this option is
+not used, and it is possible to use this pin as a blind pin to facilitate
+cartridge insertion orientation (i.e., cut off pin number 4 on the cartridge
+and plug the corresponding pin on the console, e.g., with heat shrink tubing).
 
 
 BabyBoy
@@ -245,3 +308,12 @@ In the _devices\tweetyboy\diagram\ folder, you will find diagram of the
 TweetyBoy console. In the !Tweetyboy folder, you will find a ready-made SD
 card image. The Tweetyboy folder contains source codes of sample
 applications for TweetyBoy.
+
+
+- In the "_devices\<console>\diagram\" folders, you will find console schematic
+  diagrams.
+
+- In the "!<console>" folders, you will find compiled sample programs.
+
+- The "<console>" folders contain the source codes for sample console
+  applications.

@@ -1,0 +1,12 @@
+Open Issues
+* teleporters and spinners cannot be removed/enabled
+* non wall items are only rendered in the center line of view, 
+  requiring architectural measures to prevent the player from noticing too easily
+* interaction can only affect one cell    
+* The monster might also hit the player when the player choses to retreat (0 and 1 on D8).
+* Roll initiative for the first attack (user upper bits of timer?)
+
+Fixed Issues
++ opening doors doesn't consume a key
++ doors open without a key
++ the fountain doesn't work (victory item not given)

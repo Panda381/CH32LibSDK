@@ -1,0 +1,137 @@
+mám CH32V006E8R6 QSOP24 za 6.8 Kè (0.635mm) !!!!
+    CH32V006F8P6 TSSOP20 za 6.9 Kè (0.65mm)
+
+
+WCH81 - klon ZX81
+-----------------
+procesor CH32V006E8R6, QSOP24 (0.635mm), 62KB flash, 8KB RAM, 1xADTM, 1xGPTM, 1xstream, 2xwatch, 8+3 ADC, 1xOPA, 2xUSART, 1xI2C, 1xSPI
+- sw vychází z PidiPad
+
+- (2) napájení USB 5V + stabilizátor na 3.3V
+- (4) ètení øádkù Klávesnice 4x10=40 tlaèítek
+- (2) krystal 25 MHz
+- (1) audio výstup
+- (2) I2C ext
+- (2) USART pro CPU2
+- (1) programovací vstup SWIO
+- (1) video výstup SPI obraz
+- (3) výstup RGB barva
+- (2) HSYNC a VSYNC
+- (4) SD karta ... softwarovì
+potøebuji 24 pinù
+
+fast/slow mode - øídit kolik øádkù se zobrazí, možná pøes POKE
+
+klávesnice pøes CH32V002A4M6, 16 pinù:
+- (10) sloupce matice 4x10 = 40
+- (2) napájení
+- (1) programování
+- (2) komunikace s CPU1
+- (1) volný?
+
+1 	PD1/SWIO ... programování (TIM1 CH4)
+2	PC0 ... VIDEO video out, SPI1 MOSI mapping 3
+3 	PC1 ... I2C SDA map 0 (TIM2 CH4)
+4 	PC2 ... I2C SCL map 0 (TIM2 CH2)
+5 	VSS ... GND
+6 	VDD ... +3V3
+7	PC5/RST ... HSYNC, TIM2 mapping 2, channel 1 output HSYNC, channel 2 interrupt
+8	PC4/MCO/A2 ... VSYNC
+9	PD2/A3 ... DEBUG USART2 TX map 2 (TIM2 CH3)
+10	PD3/A4 ... klávesnice
+11	PD4/A7 ... klávesnice (TIM1 ETR)
+12 	PD5/A5 ... USART1 RX map 1 do CPU2 ... RX1-TX2
+13 	PD6/A6 ... USART1 TX map 1 do CPU2 ... TX1-RX2
+14	PD7 ... klávesnice
+15	PA4 ... SD_CS
+16	PA5 ... SD_CLK
+17 	PA1/PA6/XI ... krystal 25 MHz
+18	PA0 ... SD_MISO (TIM1 CH1N)
+19 	PA2/A0/XO ... krystal 25 MHz (TIM1 CH2N)
+20	PD0 ... SD_MOSI (TIM1 CH3N)
+21 	PA3 ... AUDIO audio výstup, Timer1 ch 1 map 5
+22 	PB0 ... BLUE open drain (SPI1 CS) (TIM1 CH2)
+23 	PB1 ... RED open drain (SPI1 SCK)
+24 	PB3/SWCLK ... GREEN open drain (TIM1 BKIN)
+
+PB2 (SPI1 MISO)
+PC3 (TIM1 CH3)
+PC6 (USART1 CTS)
+PC7 (USART1 RTS)
+
+// Remap SPI1 (default 0)
+//	0 ... PC1:CS, PC5:SCK, PC7:MISO, PC6:MOSI x
+//	1 ... PC0:CS, PC5:SCK, PC7:MISO, PC6:MOSI x
+//	2 ... PC4:CS, PD2:SCK, PB3:MISO, PD3:MOSI
+//	3 ... PB0:CS, PB1:SCK, PB2:MISO, PC0:MOSI !!!!
+//	4 ... PD3:CS, PD4:SCK, PD5:MISO, PD6:MOSI x
+//	5 ... PC1:CS, PA1:SCK, PB5:MISO, PA2:MOSI x
+//	6 ... PC4:CS, PB5:SCK, PC7:MISO, PB4:MOSI x
+INLINE void GPIO_Remap_SPI1(int map) { GPIO_Remap1_3b(0, map); }
+
+// Remap Timer 1 (default 0)
+//	0 ... PC5:ETR, PD2:CH1, PA1:CH2, PC3:CH3, PC4:CH4, PC2:BKIN, PD0:CH1N, PA2:CH2N, PD1:CH3N
+//	1 ... PD4:ETR, PD2:CH1, PA1:CH2, PC3:CH3, PC4:CH4, PC2:BKIN, PD0:CH1N, PA2:CH2N, PD1:CH3N
+//	2 ... PC5:ETR, PC6:CH1, PC7:CH2, PC0:CH3, PD3:CH4, PC1:BKIN, PC3:CH1N, PC4:CH2N, PD1:CH3N
+//	3 ... PC2:ETR, PC4:CH1, PC7:CH2, PC5:CH3, PD4:CH4, PC1:BKIN, PC3:CH1N, PD2:CH2N, PC6:CH3N
+//	4 ... PD4:ETR, PA3:CH1, PB0:CH2, PB1:CH3, PD1:CH4, PB3:BKIN, PA0:CH1N, PA2:CH2N, PD0:CH3N
+//	5 ... PD4:ETR, PA3:CH1, PB0:CH2, PC3:CH3, PD1:CH4, PB3:BKIN, PA0:CH1N, PA2:CH2N, PD0:CH3N !!!!
+//	6 ... PD4:ETR, PA3:CH1, PB0:CH2, PB1:CH3, PB2:CH4, PA7:BKIN, PA0:CH1N, PA2:CH2N, PD0:CH3N
+//	7 ... PB4:ETR, PC4:CH1, PC5:CH2, PC6:CH3, PC7:CH4, PB2:BKIN, PC0:CH1N, PC1:CH2N, PC2:CH3N
+//	8 ... PB4:ETR, PC4:CH1, PC5:CH2, PC6:CH3, PC7:CH4, PB2:BKIN, PA3:CH1N, PB0:CH2N, PB1:CH3N
+//	9 ... PB4:ETR, PA0:CH1, PA1:CH2, PA2:CH3, PA3:CH4, PB2:BKIN, PC0:CH1N, PC1:CH2N, PC2:CH3N
+INLINE void GPIO_Remap_TIM1(int map) { GPIO_Remap1_4b(10, map); }
+
+// Remap Timer 2 (default 0)
+//	0 ... PD4:CH1/ETR, PD3:CH2, PC0:CH3/CH1N, PD7:CH4/CH2N
+//	1 ... PC1:CH1/ETR, PD3:CH2, PC0:CH3, PD7:CH4/CH2N
+//	2 ... PC5:CH1/ETR, PC2:CH2, PD2:CH3/CH1N, PC1:CH4/CH2N !!!!
+//	3 ... PC1:CH1/ETR, PC7:CH2, PD6:CH3/CH1N, PD5:CH4/CH2N
+//	4 ... PC0:CH1/ETR, PC1:CH2, PC3:CH3, PB6:CH4/CH2N
+//	5 ... PA0:CH1/ETR, PA1:CH2, PA2:CH3/CH1N, PA3:CH4/CH2N
+//	6 ... PB1:CH1/ETR, PA1:CH2, PA2:CH3/CH1N, PA3:CH4/CH2N
+//	7 ... PD3:CH1/ETR, PD4:CH2, PA2:CH3/CH1N, PA3:CH4/CH2N
+INLINE void GPIO_Remap_TIM2(int map) { GPIO_Remap1_3b(14, map); }
+
+// Remap USART1 (default 0)
+//	0 ... PD5:TX, PD6:RX, PD3:CTS, PC2:RTS
+//	1 ... PD6:TX, PD5:RX, PC6:CTS, PC7:RTS !!!!
+//	2 ... PD0:TX, PD1:RX, PC3:CTS, PC2:RTS
+//	3 ... PC0:TX, PC1:RX, PC6:CTS, PC7:RTS
+//	4 ... PD1:TX, PB3:RX, PD7:CTS, PA5:RTS
+//	5 ... PB3:TX, PD1:RX, PD7:CTS, PA5:RTS
+//	6 ... PC5:TX, PC6:RX, PC7:CTS, PB4:RTS
+//	7 ... PB5:TX, PB6:RX, PC7:CTS, PB4:RTS
+//	8 ... PA0:TX, PA1:RX, PD2:CTS, PD3:RTS
+//	9 ... PA0:TX, PC4:RX, PD5:CTS, PD4:RTS
+INLINE void GPIO_Remap_USART1(int map) { GPIO_Remap1_4b(6, map); }
+
+// Remap USART2 (default 0) (only CH32V005-CH32V007)
+//	0 ... PA7:TX, PB3:RX, PA4:CTS, PA5:RTS
+//	1 ... PA4:TX, PA5:RX, PA7:CTS, PB3:RTS
+//	2 ... PA2:TX, PA3:RX, PA0:CTS, PA1:RTS
+//	3 ... PD2:TX, PD3:RX, PA0:CTS, PA1:RTS !!!!
+//	4 ... PB0:TX, PB1:RX, PB6:CTS, PA1:RTS
+//	5 ... PC4:TX, PD1:RX, PA4:CTS, PA11:RTS
+//	6 ... PA6:TX, PA5:RX, PA7:CTS, PB3:RTS
+INLINE void GPIO_Remap_USART2(int map) { GPIO_Remap1_3b(20, map); }
+
+
+CPU2: CH32V002A4M6
+
+1 PC1
+2 PC2
+3 PC3
+4 PC4
+5 PC4/MCO/A2
+6 PC7
+7	PD1/SWIO ... SWIO2
+8 PD4/A7
+9 PD5/A5 ... USART1_TX map 0, RX1-TX2
+10 PD6/A6 ... USART1_RX map 0, TX1-RX2
+11 PD7/RST
+12 PA1/XI/A1
+13 PA2/XO/A0 ... ext USART2 TX map 2
+14	VSS
+15	VDD
+16 PC0

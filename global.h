@@ -8,7 +8,7 @@
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 
-#define SDK_VER		010	// SDK library version in hundredths (010 = 0.10)
+#define SDK_VER		031	// SDK library version in hundredths (031 = 0.31)
 
 // ----------------------------------------------------------------------------
 //                               Attributes
@@ -216,6 +216,10 @@ STATIC_ASSERT(sizeof(u64) == 8, "Incorrect typedef u64!");
 #include "_devices/babypad/_config.h"
 #endif
 
+#if USE_BEATLEBOYPAD
+#include "_devices/beatleboypad/_config.h"
+#endif
+
 #if USE_PIDIBOY
 #include "_devices/pidiboy/_config.h"
 #endif
@@ -230,6 +234,10 @@ STATIC_ASSERT(sizeof(u64) == 8, "Incorrect typedef u64!");
 
 #if USE_BABYPC
 #include "_devices/babypc/_config.h"
+#endif
+
+#if USE_PIDIPC
+#include "_devices/pidipc/_config.h"
 #endif
 
 #include <string.h>		// memcpy

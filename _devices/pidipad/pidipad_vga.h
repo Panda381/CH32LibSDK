@@ -14,7 +14,7 @@
 // green color, open-drain output via PB3 (pin 24)
 // VSYNC, output via PC1 (pin 3)
 // Timer 2, channel 2 - HSYNC, output via PC2 (pin 4), TIM2 mapping 2 (PC5:CH1/ETR, *PC2:CH2, PD2:CH3/CH1N, *PC1:CH4/CH2N)
-// Timer 2, channel 1 - interrup to draw image line in pidipad_vga_asm.S
+// Timer 2, channel 1 - interrupt to draw image line in pidipad_vga_asm.S
 //
 // Videomode 640x480/60Hz timing
 // -----------------------------

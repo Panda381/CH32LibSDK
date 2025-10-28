@@ -5,8 +5,8 @@
 //
 // ****************************************************************************
 // 10-bit conversion, max. 24MHz input clock, 8+2 channels (channel 8: reference
-//  voltage, channel 9: calibration voltage)
-// Conversion time Tconv = sanpling_time + 11Tadcclk
+//  voltage 1.2V, channel 9: calibration voltage)
+// Conversion time Tconv = sampling_time + 11Tadcclk
 // - Rule conversion group: conversion order of the channels is set in the ADC_RSQRx register (up to 16 conversions).
 // - Injection conversion group: conversion order is set in the ADC_ISQR register (up to 4 conversions).
 

@@ -250,7 +250,7 @@
 	sw	a0,SPI_DATAR_OFF(a4)	// -5: [2] send sample to SPI
 
 	// [5] send 1st color
-	lbu	a0,0(a3)		// -3: [2] A1 <- load attribute
+	lbu	a0,0(a3)		// -3: [2] A0 <- load attribute
 	addi	a3,a3,1			// -1: [1] increase attribute address
 	sw	a0,GPIO_OUTDR_OFF(a5)	//  0: [2] send color
 
@@ -263,7 +263,7 @@
 	nop_rep	2			// +29: [2]
 
 	// [3] send 2nd color
-	srli	a0,a0,4			// +31: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +31: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +32: [2] send color
 
 	// [17] delay
@@ -361,7 +361,7 @@
 	sw	a0,SPI_DATAR_OFF(a4)	// -5: [2] send sample to SPI
 
 	// [5] send 1st color
-	lbu	a0,0(a3)		// -3: [2] A1 <- load attribute
+	lbu	a0,0(a3)		// -3: [2] A0 <- load attribute
 	addi	a3,a3,1			// -1: [1] increase attribute address
 	sw	a0,GPIO_OUTDR_OFF(a5)	//  0: [2] send color
 
@@ -374,7 +374,7 @@
 	nop_rep	2			// +13: [2]
 
 	// [3] send 2nd color
-	srli	a0,a0,4			// +15: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +15: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +16: [2] send color
 
 	// [11] delay
@@ -469,7 +469,7 @@
 	nop				// -34: [1]
 	sw	x0,SPI_DATAR_OFF(a4)	// -33: [2] send gap to SPI
 
-	// [52] delay
+	// [21] delay
 	li	a1,5			// -31: [1]
 	.align 2,,			// -30: [0]
 	// [4*4+2=18] loop		// -30: [18]
@@ -490,7 +490,7 @@
 	sw	a0,SPI_DATAR_OFF(a4)	// -5: [2] send sample to SPI
 
 	// [5] send 1st color
-	lbu	a0,0(a3)		// -3: [2] A1 <- load attribute
+	lbu	a0,0(a3)		// -3: [2] A0 <- load attribute
 	li	t2,6			// -1: [1] loop counter
 	sw	a0,GPIO_OUTDR_OFF(a5)	//  0: [2] send color
 
@@ -506,8 +506,8 @@
 	sw	a0,SPI_DATAR_OFF(a4)	// +27: [2] send sample to SPI
 
 	// [5] send 2nd color
-	lbu	a0,0(a3)		// +29: [2] A1 <- load attribute
-	srli	a0,a0,4			// +31: [1] A1 <- load 2nd attribute
+	lbu	a0,0(a3)		// +29: [2] A0 <- load attribute
+	srli	a0,a0,4			// +31: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	//  0: [2] send color
 
 	// [17] delay
@@ -530,7 +530,7 @@
 	sw	x0,SPI_DATAR_OFF(a4)	// +22: [2] send black sample to SPI
 	j	1f			// +24: [3]
 1:	j	1f			// +27: [3]
-1:	nop_rep	2			// +30: [3]
+1:	nop_rep	2			// +30: [2]
 	sw	x0,GPIO_OUTDR_OFF(a5)	// +32: [2] send black color
 
 // Registers:
@@ -639,7 +639,7 @@
 1:	nop_rep	2			// +21: [2]
 
 	// send 4th pixel
-	srli	a0,a0,4			// +23: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +23: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +24: [2] send color
 
 	// [3] delay
@@ -655,7 +655,7 @@
 1:	nop_rep	2			// +37: [2]
 
 	// send 6th pixel
-	srli	a0,a0,4			// +39: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +39: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +40: [2] send color
 
 	// [3] delay
@@ -672,7 +672,7 @@
 	addi	a1,a1,-1		// +54: [1] loop counter
 
 	// send 8th pixel
-	srli	a0,a0,4			// +55: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +55: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +56: [2] send color
 
 	// [4,2] loop counter
@@ -760,7 +760,7 @@
 
 // [64 loop] send 2 samples ... This address must be aligned
 
-	// [8] load next character, load font sample and send sample to SPI
+	// [11] load next character, load font sample and send sample to SPI
 2:	lbu	a0,0(a2)		// -14: [2] A0 <- load text character
 	addi	a2,a2,1			// -12: [1] increase sample address
 	add	a0,a0,t2		// -11: [1] A0 <- address of the sample in the font
@@ -773,8 +773,8 @@
 #endif
 1:	sw	a0,SPI_DATAR_OFF(a4)	// -5: [2] send sample to SPI
 
-	// [4] send color
-	lbu	a0,0(a3)		// -3: [2] A1 <- load attribute
+	// [5] send color
+	lbu	a0,0(a3)		// -3: [2] A0 <- load attribute
 	nop				// -1: [1] ... wait to load
 	sw	a0,GPIO_OUTDR_OFF(a5)	//  0: [2] send color
 
@@ -785,7 +785,7 @@
 1:	j	1f			// 11: [3]
 1:	j	1f			// 14: [3]
 
-	// [8] load next character, load font sample and send sample to SPI
+	// [11] load next character, load font sample and send sample to SPI
 1:	lbu	a0,0(a2)		// +17: [2] A0 <- load text character
 	addi	a2,a2,1			// +19: [1] increase sample address
 	add	a0,a0,t2		// +20: [1] A0 <- address of the sample in the font
@@ -798,10 +798,10 @@
 #endif
 1:	sw	a0,SPI_DATAR_OFF(a4)	// +26: [2] send sample to SPI
 
-	// [5] send color
-	lbu	a0,0(a3)		// +28: [2] A1 <- load attribute
+	// [6] send color
+	lbu	a0,0(a3)		// +28: [2] A0 <- load attribute
 	nop				// +30: [1] ... wait to load
-	srli	a0,a0,4			// +31: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +31: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +32: [2] send color
 
 	// [11] delay
@@ -906,7 +906,7 @@
 	sw	a0,SPI_DATAR_OFF(a4)	// -4: [2] send sample to SPI
 
 	// [4] send color
-	lbu	a0,0(a3)		// -2: [2] A1 <- load attribute
+	lbu	a0,0(a3)		// -2: [2] A0 <- load attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	//  0: [2] send color
 
 	// [2] delay
@@ -920,9 +920,9 @@
 	sw	a0,SPI_DATAR_OFF(a4)	// +10: [2] send sample to SPI
 
 	// [6] send color
-	lbu	a0,0(a3)		// +12: [2] A1 <- load attribute
+	lbu	a0,0(a3)		// +12: [2] A0 <- load attribute
 	addi	a3,a3,1			// +14: [1] increase attribute address
-	srli	a0,a0,4			// +15: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +15: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +16: [2] send color
 
 	// [4,2] loop counter
@@ -1004,10 +1004,10 @@
 	addi	sp,sp,-4		// -12: [1]
 	sw	t0,0(sp)		// -11: [2]
 
-	// [6] send sample to SPI
+	// [6] load sample
 1:	lbu	t0,0(a2)		// -9: [2] T0 <- load sample
 
-	// [1] load first sample
+	// [1] load colors
 	lbu	t2,0(a3)		// -7: [2] T2 <- load 2 colors
 
 	// [1] prepare number of samples -> A1
@@ -1068,7 +1068,7 @@
 	srli	a0,a0,4			// +39: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +40: [2] send color
 
-	// [3] send sample to SPI
+	// [3] delay
 	j	1f			// +42: [3]
 
 	// [6] send 7th pixel
@@ -1082,7 +1082,7 @@
 	addi	a1,a1,-1		// +54: [1] loop counter
 
 	// send 8th pixel
-	srli	a0,a0,4			// +55: [1] A1 <- load 2nd attribute
+	srli	a0,a0,4			// +55: [1] A0 <- load 2nd attribute
 	sw	a0,GPIO_OUTDR_OFF(a5)	// +56: [2] send color
 
 	// [4,2] loop counter
@@ -1141,7 +1141,7 @@ TIM2_IRQHandler:
 //  T2 = TIM
 
 	// time synchronization
-	//  The exact interruption time may vary within a range of 1-5 processor clock
+	//  The exact interruption time may vary within a range of 1-7 processor clock
 	//  cycles due to the varying length of instructions in the main program.
 	lw	a0,TIM_CNT_OFF(t2)	// [2] load timer counter
 					// [1] wait
@@ -1218,7 +1218,7 @@ TIM2_IRQHandler_sync:
 	// pointer to SPI1 base -> A4
 	li	a4,SPI1_BASE
 
-	// pointer to GPIOC base -> A5
+	// pointer to GPIOB base -> A5
 	li	a5,GPIOB_BASE
 
 // Registers:
@@ -1400,6 +1400,8 @@ TIM2_IRQHandler5:
 	la	a2,SoundMelodyPtr
 	li	a4,TIM1_BASE		// A4 <- Timer 1 base
 	bgtz	a0,4f			// valid counter
+
+// The audio output is via PA3 (pin 21), Timer 1 channel 1, mapping 5.
 
 	// request to start new melody
 	la	a3,SoundMelodyNext

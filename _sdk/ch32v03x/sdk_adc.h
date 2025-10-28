@@ -5,7 +5,7 @@
 //
 // ****************************************************************************
 // 12-bit conversion, max. 8MHz input clock, 14+1 channels (channel 15: reference voltage 1.2V)
-// Conversion time Tconv = sanpling_time + 13Tadcclk
+// Conversion time Tconv = sampling_time + 13Tadcclk
 // - Rule conversion group: conversion order of the channels is set in the ADC_RSQRx register (up to 16 conversions).
 // - Injection conversion group: conversion order is set in the ADC_ISQR register (up to 4 conversions).
 

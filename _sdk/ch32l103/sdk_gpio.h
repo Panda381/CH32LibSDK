@@ -36,7 +36,7 @@ extern "C" {
 
 // GPIO port
 typedef struct {
-	io32	CFGLR;		// 0x00: configuration register low (4 bits per pin, combination , B0-B1 speed, 
+	io32	CFGLR;		// 0x00: configuration register low
 	io32	CFGHR;		// 0x04: configuration register high
 	io32	INDR;		// 0x08: input data register (8 or 16 pins)
 	io32	OUTDR;		// 0x0C: output data register (8 or 16 pins; for pull inputs: 0=pull down, 1=pull up)

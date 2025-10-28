@@ -62,7 +62,7 @@ HANDLER void SysTick_Handler()
 	KeyScan();
 #endif
 
-#if SYSTICK_SOUNDSCAN	// 1=call SoundScan() function fron SysTick system timer
+#if SYSTICK_SOUNDSCAN	// 1=call SoundScan() function from SysTick system timer
 	SoundScan();
 #endif
 }

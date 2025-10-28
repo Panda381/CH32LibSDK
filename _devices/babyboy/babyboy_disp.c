@@ -92,7 +92,7 @@ void DispI2C_Start(void)
 #endif
 }
 
-// stop I2C communcation
+// stop I2C communication
 void DispI2C_Stop(void)
 {
 #if USE_DISP == 1	// 1=use software display driver, 2=use hardware display driver (0=no driver)

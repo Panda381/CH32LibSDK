@@ -26,7 +26,7 @@ typedef struct {
 } USART_t;
 STATIC_ASSERT(sizeof(USART_t) == 0x1C, "Incorrect USART_t!");
 #define USART1	((USART_t*)USART1_BASE)	// 0x40013800
-#define USART2	((USART_t*)USART2_BASE)	// 0x40004400
+#define USART2	((USART_t*)USART2_BASE)	// 0x40004400 (only CH32V005-CH32V007)
 
 // Get USART periphery from USART index 1.. (returns NULL if not valid)
 INLINE USART_t* USART_GetHw(int inx) { return (inx == 1) ? USART1 : ((inx == 2) ? USART2 : NULL); }

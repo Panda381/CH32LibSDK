@@ -60,9 +60,9 @@
 #endif
 
 #if USE_SOUND == 2		// use sound support 1=tone, 2=melody
-#define SYSTICK_SOUNDSCAN 1	// 1=call SoundScan() function fron SysTick system timer
+#define SYSTICK_SOUNDSCAN 1	// 1=call SoundScan() function from SysTick system timer
 #else
-#define SYSTICK_SOUNDSCAN 0	// 1=call SoundScan() function fron SysTick system timer
+#define SYSTICK_SOUNDSCAN 0	// 1=call SoundScan() function from SysTick system timer
 #endif
 
 // ----------------------------------------------------------------------------
