@@ -24,7 +24,7 @@ extern "C" {
 #endif
 
 // Button codes
-#define KEY_1		1	// 1 NOT
+#define KEY_1		1	// 1 EDIT
 #define KEY_2		2	// 2 AND
 #define KEY_3		3	// 3 THEN
 #define KEY_4		4	// 4 TO
@@ -32,41 +32,41 @@ extern "C" {
 #define KEY_6		6	// 6 DOWN
 #define KEY_7		7	// 7 UP
 #define KEY_8		8	// 8 RIGHT
-#define KEY_9		9	// 9 HOME
+#define KEY_9		9	// 9 GRAPHICS
 #define KEY_0		10	// 0 RUBOUT
 
-#define KEY_Q		11	// Q
-#define KEY_W		12	// W
-#define KEY_E		13	// E
-#define KEY_R		14	// R
-#define KEY_T		15	// T
-#define KEY_Y		16	// Y "
-#define KEY_U		17	// U $
-#define KEY_I		18	// I (
-#define KEY_O		19	// O )
-#define KEY_P		20	// P *
+#define KEY_Q		11	// Q PLOT "" SIN
+#define KEY_W		12	// W UNPLOT OR COS
+#define KEY_E		13	// E REM STEP TAN
+#define KEY_R		14	// R RUN <= INT
+#define KEY_T		15	// T RAND <> RND
+#define KEY_Y		16	// Y RETURN >= STR$
+#define KEY_U		17	// U IF $ CHR$
+#define KEY_I		18	// I INPUT ( CODE
+#define KEY_O		19	// O POKE ) PEEK
+#define KEY_P		20	// P PRINT " TAB
 
-#define KEY_A		21	// A
-#define KEY_S		22	// S
-#define KEY_D		23	// D
-#define KEY_F		24	// F
-#define KEY_G		25	// G
-#define KEY_H		26	// H **
-#define KEY_J		27	// J -
-#define KEY_K		28	// K +
-#define KEY_L		29	// L =
-#define KEY_NL		30	// NEW LINE, EDIT
+#define KEY_A		21	// A NEW STOP ASN
+#define KEY_S		22	// S SAVE BEEP ACS
+#define KEY_D		23	// D DIM SLOW ATN
+#define KEY_F		24	// F FOR FAST SGN
+#define KEY_G		25	// G GOTO MEMORY ABS
+#define KEY_H		26	// H GOSUB ** SQR
+#define KEY_J		27	// J LOAD - VAL
+#define KEY_K		28	// K LIST + LEN
+#define KEY_L		29	// L LET = READ
+#define KEY_NL		30	// NEWLINE FUNCTION
 
 #define KEY_SHIFT	31	// SHIFT
-#define KEY_Z		32	// Z :
-#define KEY_X		33	// X ;
-#define KEY_C		34	// C ?
-#define KEY_V		35	// V /
-#define KEY_B		36	// B OR
-#define KEY_N		37	// N <
-#define KEY_M		38	// M >
-#define KEY_DOT		39	// . ,
-#define KEY_SPACE	40	// SPACE BREAK
+#define KEY_Z		32	// Z DATA : LN
+#define KEY_X		33	// X CLEAR ; EXP
+#define KEY_C		34	// C CONT ? AT
+#define KEY_V		35	// V CLS / HEX$
+#define KEY_B		36	// B SCROLL * INKEY$
+#define KEY_N		37	// N NEXT < NOT
+#define KEY_M		38	// M PAUSE > PI
+#define KEY_DOT		39	// . COLOR , COL
+#define KEY_SPACE	40	// SPACE BREAK %
 
 #define KEY_RIGHT	KEY_8	// RIGHT
 #define KEY_UP		KEY_7	// UP

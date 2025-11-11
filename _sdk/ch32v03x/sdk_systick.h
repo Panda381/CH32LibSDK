@@ -114,6 +114,9 @@ INLINE void SysTick_SetCmp(u64 cmp)
 // Get SysTick comparison value
 INLINE u64 SysTick_GetCmp64(void) { return SysTick->CMP | ((u64)SysTick->CMPH << 32); }
 
+// scan keyboard (called from SysTick)
+void KeyScan();
+
 // Initialize SysTick
 void SysTick_Init(void);
 

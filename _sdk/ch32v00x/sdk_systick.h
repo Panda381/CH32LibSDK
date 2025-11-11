@@ -88,6 +88,9 @@ INLINE u32 SysTick_Get(void) { return SysTick->CNT; }
 INLINE void SysTick_SetCmp(u32 cmp) { SysTick->CMP = cmp; }
 INLINE u32 SysTick_GetCmp(void) { return SysTick->CMP; }
 
+// scan keyboard (called from SysTick)
+void KeyScan();
+
 // Initialize SysTick
 void SysTick_Init(void);
 
