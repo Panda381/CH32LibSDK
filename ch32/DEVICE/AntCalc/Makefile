@@ -1,4 +1,7 @@
 
+# reserve 2 last pages (512 B) of flash for memory slot
+FLASHSIZE=0x3E00
+
 ##############################################################################
 #               Include Makefile 1st stage - prepare MCU type
 ##############################################################################
@@ -69,7 +72,7 @@ include ${CH32_ROOT_PATH}/Makefile1.inc
 ##############################################################################
 
 # Target project name
-TARGET=BeatleCalc
+TARGET=AntCalc
 
 # reduce program size
 EXTRA_AFLAGS += -D REDUCE_CRT0_SIZE=1
@@ -91,10 +94,13 @@ CSRC += src/calc_edit.c
 CSRC += src/calc_exec.c
 CSRC += src/calc_mant.c
 CSRC += src/calc_num.c
-CSRC += src/calc_stk.c
-CSRC += src/calc.c
-CSRC += src/emu.c
 CSRC += src/main.c
+CSRC += src/disp.c
+CSRC += src/draw.c
+CSRC += src/key.c
+
+CSRC += font/font_bold_8x12.c
+CSRC += font/font_cond_6x8B.c
 
 # C++ source files
 SRC +=
