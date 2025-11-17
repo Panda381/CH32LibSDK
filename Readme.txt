@@ -1,6 +1,6 @@
 CH32LibSDK - SDK library for low-end CH32 RISC-V microcontrollers
 =================================================================
-Pre-alpha version 0.33, under development.
+Pre-alpha version 0.34, under development.
 
 Copyright (c) 2025 Miroslav Nemecek
 
@@ -548,6 +548,32 @@ In the _devices\tweetyboy\diagram\ folder, you will find diagram of the
 TweetyBoy console. In the !Tweetyboy folder, you will find a ready-made SD
 card image. The Tweetyboy folder contains source codes of sample
 applications for TweetyBoy.
+
+
+XTree
+-----
+XTree is a Christmas tree-shaped pendant with a CH32V002J4M6 processor, 12
+flashing LEDs, and a speaker that plays "Jingle Bells." XTree is powered by a
+CR2032 battery. A label with a picture of a Christmas tree and, optionally, a
+star is glued to the front. Only the LEDs are on the front; all other
+components are soldered to the back of the circuit board. The components used
+should be easy to solder, even for novice designers. On the bottom edge is a
+connector for programming the processor, which also serves as a switch -
+inserting the jumper on the right side of the connector turns XTree on. The
+jumper also represents the trunk of the tree. When turned off, the jumper can
+be inserted on the left side of the connector. High-brightness LEDs should be
+used, otherwise they may have low brightness. Matte LEDs would be more
+suitable, but they have lower brightness. Alternatively, reduce the resistor
+values. On the other hand, low LED brightness ensures lower battery consumption
+- the consumption is around 8mA. The sound from the speaker is not very loud,
+but it should be enough so that the music is not too distracting. In the
+prototype, I used wires instead of the top layer of the printed circuit board
+- I recommend using a double-sided printed circuit board, or even one with a
+printed image.
+
+>>> The source codes and all necessary XTree documentation can be found in the
+CH32LibSDK library in the ch32\TOYS\XTree folder.
+https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/XTree <<<
 
 
 - In the "_devices\<console>\diagram\" folders, you will find console schematic

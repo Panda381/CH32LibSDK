@@ -1,0 +1,3 @@
+To install MIDIFile library:
+
+python.exe -m pip install mido
