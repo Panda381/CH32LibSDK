@@ -47,24 +47,24 @@
 #define PLLCLK_MUL	0		// only *2 supported; 24 MHz * 2 = 48 MHz
 
 // System clock divider: 1, 2, 3, 4, 5, 6, 7, 8, 16, 32, 64, 128, 256 (default 1)
-#define SYSCLK_DIV	1
+#define SYSCLK_DIV	8
 
 // ADC clock divider: (1,) 2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128 (default 1 or 2)
-#define ADCCLK_DIV	24		// CH32V0: max. 24 MHz (48 / 2 = 24 MHz)
+#define ADCCLK_DIV	3		// CH32V0: max. 24 MHz (48 / 2 = 24 MHz)
 
 // number of HCLK clock cycles per 1 us (used with Wait functions)
 // - If you want to change frequency of system clock run-time, use a variable instead of constant.
-#define HCLK_PER_US	24
+#define HCLK_PER_US	3
 
 // increment of system time in [ms] on SysTick interrupt (0=do not use SysTick interrupt)
-#define SYSTICK_MS	2
+#define SYSTICK_MS	5
 
 // ----------------------------------------------------------------------------
 //                          Peripheral clock enable
 // ----------------------------------------------------------------------------
 
-#define ENABLE_SRAM	1		// SRAM enable
-#define ENABLE_FLASH	1		// FLASH enable
+#define ENABLE_SRAM	0		// SRAM enable
+#define ENABLE_FLASH	0		// FLASH enable
 #define ENABLE_WWDG	0		// Window watchdog enable
 #define ENABLE_PWR	1		// Power module enable
 #define ENABLE_AFI	1		// I/O auxiliary function enable

@@ -5,6 +5,8 @@
 //
 // ****************************************************************************
 
+#define SLEEPTIME	10	// sleep time in seconds
+
 #include "../include.h"
 
 // display number 1..6
@@ -14,7 +16,7 @@ u8 DispNum = 1;
 u8 DispPhase = 0;
 
 // key press time
-u32 PressTime;
+volatile u32 PressTime;
 
 // output and input pins
 #define OUT1	PA1
@@ -61,7 +63,7 @@ const u8 LedStage[3*6] = {
 	S1, S2, S3,	// 6
 };
 
-// interrupt to serve LEDs - called from SysTick every 2 ms, whole cycle takes 6ms (=167 Hz)
+// interrupt to serve LEDs - called from SysTick every 5 ms, whole cycle takes 15ms (=67 Hz)
 void KeyScan(void)
 {
 	// set OFF all outputs
@@ -120,6 +122,22 @@ void KeyScan(void)
 	}
 }
 
+#define IN_PORT		GPIO_PORTINX(IN)	// port of input key
+#define IN_PIN		GPIO_PIN(IN)		// pin of input key
+
+// interrupt on key falling edge
+HANDLER void EXTI7_0_IRQHandler()
+{
+	// clear interrupt requst
+	EXTI_Clear(IN_PIN);
+
+	// enable SysTick counter
+	SysTick_Enable();
+
+	// flag - key is pressed
+	PressTime = Time();
+}
+
 int main(void)
 {
 	int i;
@@ -129,7 +147,11 @@ int main(void)
 	GPIO_Remap_PA1PA2(0);
 
 	// setup key pin
-	GPIO_Mode(IN, GPIO_MODE_IN_PU);
+	GPIO_Mode(IN, GPIO_MODE_IN_PU);		// mode with pull-up
+	GPIO_EXTILine(IN_PORT, IN_PIN);		// setup external interrupt input pin: PC4 is mapped to EXTI4
+	EXTI_FallEnable(IN_PIN);		// enable EXTI on falling edge
+	EXTI_Enable(IN_PIN);			// enable EXTI line interrupt
+	NVIC_IRQEnable(IRQ_EXTI7);		// enable EXTI interrupt service
 
 #if 0
 	// DEBUG: self-test, counts 6..1
@@ -140,20 +162,36 @@ int main(void)
 	}
 #endif
 
-	// setup key press time (10 seconds to the past)
-	PressTime = Time() - 10*1000000*HCLK_PER_US;
+	// setup key press time (2 seconds to the past)
+	PressTime = Time() - 2*1000000*HCLK_PER_US;
 
 	// main loop
 	while (True)
 	{
-		// key is pressed
-		if (GPIO_In(IN) == 0) PressTime = Time();
+		// wait for SysTick interrupt
+		PWR_EnterSleep(True);
 
 		// rolling the dice for minimal time 1.5 second after releasing
 		if ((u32)(Time() - PressTime) < 1500000*HCLK_PER_US)
 		{
+			// this is done with SysTick frequency every 5ms
 			DispNum = RandU8MinMax(1, 6);
-			WaitMs(50);
+		}
+
+		// go to deep sleep
+		if ((u32)(Time() - PressTime) > SLEEPTIME*1000000*HCLK_PER_US)
+		{
+			// disable SysTick counter
+			SysTick_Disable();
+
+			// set OFF all outputs
+			GPIO_Mode(OUT1, GPIO_MODE_IN);
+			GPIO_Mode(OUT2, GPIO_MODE_IN);
+			GPIO_Mode(OUT3, GPIO_MODE_IN);
+			GPIO_Mode(OUT4, GPIO_MODE_IN);
+
+			// Enter standby mode (use_wfi: True=use WFI wakeup, False=use WFE wakeup)
+			PWR_EnterStandby(True);
 		}
 	}
 }
