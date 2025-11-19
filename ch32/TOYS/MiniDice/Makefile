@@ -69,7 +69,7 @@ include ${CH32_ROOT_PATH}/Makefile1.inc
 ##############################################################################
 
 # Target project name
-TARGET=XTree
+TARGET=MiniDice
 
 # reduce program size
 EXTRA_AFLAGS += -D REDUCE_CRT0_SIZE=1
@@ -86,7 +86,6 @@ ASRC +=
 
 # C source files
 CSRC += src/main.c
-CSRC += src/audiolib.c
 
 # C++ source files
 SRC +=

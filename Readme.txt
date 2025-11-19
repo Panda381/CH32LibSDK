@@ -1,6 +1,6 @@
 CH32LibSDK - SDK library for low-end CH32 RISC-V microcontrollers
 =================================================================
-Pre-alpha version 0.34, under development.
+Pre-alpha version 0.35, under development.
 
 Copyright (c) 2025 Miroslav Nemecek
 
@@ -574,6 +574,31 @@ printed image.
 >>> The source codes and all necessary XTree documentation can be found in the
 CH32LibSDK library in the ch32\TOYS\XTree folder.
 https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/XTree <<<
+
+
+MiniDice
+--------
+MiniDice is an electronic dice with 7 LEDs, a CH32V002J4M6 processor, and a
+CR2032 battery. The dice is activated by pressing it against the table - there
+is a microswitch on the bottom. A 4-pin pin header with a jumper serves as a
+power switch, and is also used to program the processor. Only 7 LEDs are
+located on the top of the circuit board; all other components are soldered to
+the bottom of the circuit board. In the prototype, I used wires instead of one
+layer of printed circuit board. You will certainly use a double-sided printed
+circuit board. I used TS6604B-7.0 with a 3.5mm tactile length as the activation
+microswitch. Two layers of foam rubber are glued to the sides from below for
+cushioning, so that the dice stands upright on the table and can be easily
+pressed. I printed the top label on an inkjet printer, glued it on, and covered
+it with transparent adhesive tape. You will probably use printing on the
+printed circuit board. When soldering the battery holder, be careful not to
+short-circuit the middle LED - if necessary, bend the battery holder slightly
+in that spot. If the battery is too difficult to insert, bend the pressure
+springs of the battery holder. The current consumption from the battery is
+around 8mA.
+
+>>> The source codes and all necessary MiniDice documentation can be found in
+the CH32LibSDK library in the ch32\TOYS\MiniDice folder.
+https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/MiniDice <<<
 
 
 - In the "_devices\<console>\diagram\" folders, you will find console schematic
