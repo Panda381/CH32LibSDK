@@ -609,13 +609,14 @@ https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/MiniDice <<<
 
 Magic Beater
 ------------
-Magic Beater is a simple sound synthesizer and sequencer in one. It allows you
-to play rhythms and melodies that repeat in a loop. The entire loop is 4 bars
-long - corresponding to 4 flashes of the indicator LED. Magic Beater is
-controlled by 2 buttons. Button A is used to record the melody. The pitch is
-determined by the light falling on the photodiode. The pitch can be controlled
-by modulating the light. Button B is used to record the rhythm. Pressing
-buttons A and B simultaneously resets the memory.
+Magic Beater is a simple sound synthesizer and sequencer in onem, with
+processor CH32V002J4M6. It allows you to play rhythms and melodies that repeat
+in a loop. The entire loop is 4 bars long - corresponding to 4 flashes of the
+indicator LED. Magic Beater is controlled by 2 buttons. Button A is used to
+record the melody. The pitch is determined by the light falling on the
+photodiode. The pitch can be controlled by modulating the light. Button B is
+used to record the rhythm. Pressing buttons A and B simultaneously resets the
+memory.
 
 Magic Beater is based on the RaveBOX v1.0 project, created by Vladimir Bartos
 https://github.com/Mat0ny/RaveBOX.
