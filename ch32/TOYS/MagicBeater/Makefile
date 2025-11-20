@@ -69,10 +69,13 @@ include ${CH32_ROOT_PATH}/Makefile1.inc
 ##############################################################################
 
 # Target project name
-TARGET=Led
+TARGET=MagicBeater
+
+# reduce program size
+EXTRA_AFLAGS += -D REDUCE_CRT0_SIZE=1
 
 # Destination directory
-TARGETDIR=Demo
+TARGETDIR=Toys
 
 ##############################################################################
 #                             Input files

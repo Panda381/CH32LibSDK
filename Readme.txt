@@ -1,6 +1,6 @@
 CH32LibSDK - SDK library for low-end CH32 RISC-V microcontrollers
 =================================================================
-Pre-alpha version 0.35, under development.
+Pre-alpha version 0.36, under development.
 
 Copyright (c) 2025 Miroslav Nemecek
 
@@ -581,24 +581,48 @@ MiniDice
 MiniDice is an electronic dice with 7 LEDs, a CH32V002J4M6 processor, and a
 CR2032 battery. The dice is activated by pressing it against the table - there
 is a microswitch on the bottom. A 4-pin pin header with a jumper serves as a
-power switch, and is also used to program the processor. Only 7 LEDs are
-located on the top of the circuit board; all other components are soldered to
-the bottom of the circuit board. In the prototype, I used wires instead of one
-layer of printed circuit board. You will certainly use a double-sided printed
-circuit board. I used TS6604B-7.0 with a 3.5mm tactile length as the activation
-microswitch. Two layers of foam rubber are glued to the sides from below for
-cushioning, so that the dice stands upright on the table and can be easily
-pressed. I printed the top label on an inkjet printer, glued it on, and covered
-it with transparent adhesive tape. You will probably use printing on the
-printed circuit board. When soldering the battery holder, be careful not to
-short-circuit the middle LED - if necessary, bend the battery holder slightly
-in that spot. If the battery is too difficult to insert, bend the pressure
-springs of the battery holder. The current consumption from the battery is
-around 8mA.
+power switch, and is also used to program the processor. However, it is not
+necessary to use the power switch. The dice automatically turns off 10 seconds
+after the last use and enters power-saving mode, when it consumes only 10uA
+from the battery. If you do not need to program the processor, you can remove
+the programming connector and connect the BAT and VCC pins. In power-saving
+mode, the battery should last 1 to 2 years. Alternatively, remove the battery
+if you are not going to use it for a long time.
+
+Only 7 LEDs are located on the top of the circuit board; all other components
+are soldered to the bottom of the circuit board. In the prototype, I used wires
+instead of one layer of printed circuit board. You will certainly use a
+double-sided printed circuit board. I used TS6604B-7.0 with a 3.5mm tactile
+length as the activation microswitch. Two layers of foam rubber are glued to
+the sides from below for cushioning, so that the dice stands upright on the
+table and can be easily pressed. I printed the top label on an inkjet printer,
+glued it on, and covered it with transparent adhesive tape. You will probably
+use printing on the printed circuit board. When soldering the battery holder,
+be careful not to short-circuit the middle LED - if necessary, bend the battery
+holder slightly in that spot. If the battery is too difficult to insert, bend
+the pressure springs of the battery holder.
 
 >>> The source codes and all necessary MiniDice documentation can be found in
 the CH32LibSDK library in the ch32\TOYS\MiniDice folder.
 https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/MiniDice <<<
+
+
+Magic Beater
+------------
+Magic Beater is a simple sound synthesizer and sequencer in one. It allows you
+to play rhythms and melodies that repeat in a loop. The entire loop is 4 bars
+long - corresponding to 4 flashes of the indicator LED. Magic Beater is
+controlled by 2 buttons. Button A is used to record the melody. The pitch is
+determined by the light falling on the photodiode. The pitch can be controlled
+by modulating the light. Button B is used to record the rhythm. Pressing
+buttons A and B simultaneously resets the memory.
+
+Magic Beater is based on the RaveBOX v1.0 project, created by Vladimir Bartos
+https://github.com/Mat0ny/RaveBOX.
+
+>>> The source codes and all necessary Magic Beater documentation can be found
+in the CH32LibSDK library in the ch32\TOYS\MagicBeater folder.
+https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/MagicBeater <<<
 
 
 - In the "_devices\<console>\diagram\" folders, you will find console schematic
