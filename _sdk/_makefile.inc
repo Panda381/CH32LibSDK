@@ -43,4 +43,5 @@ CSRC += ${CH32LIBSDK_SDK_DIR}/${SDK_SUBDIR}/sdk_spi.c
 CSRC += ${CH32LIBSDK_SDK_DIR}/${SDK_SUBDIR}/sdk_systick.c
 CSRC += ${CH32LIBSDK_SDK_DIR}/${SDK_SUBDIR}/sdk_tim.c
 CSRC += ${CH32LIBSDK_SDK_DIR}/${SDK_SUBDIR}/sdk_usart.c
+CSRC += ${CH32LIBSDK_SDK_DIR}/${SDK_SUBDIR}/sdk_wdg.c
 endif

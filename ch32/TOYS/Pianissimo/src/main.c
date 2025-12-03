@@ -395,7 +395,7 @@ int main(void)
 				NVIC_IRQEnable(IRQ_EXTI7);
 
 				// Enter standby mode ... continue after wake-up from EXTI
-				PWR_EnterStandby(True);
+				PWR_EnterStandby();
 
 				// set all rows OFF
 				for (row = 0; row < ROWNUM; row++) // loop rows

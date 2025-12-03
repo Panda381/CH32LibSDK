@@ -197,7 +197,7 @@ extern const sMelodyNote SoundSamp4[];
 */
 
 // Sound initialize
-// The audio output is via PA3 (pin 21), Timer 1 channel 1, mapping 5.
+// The audio output is via PC4 (pin 4), Timer 1 channel 4, mapping 0.
 void SoundInit();
 
 // Sound terminate

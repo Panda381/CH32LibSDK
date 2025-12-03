@@ -95,8 +95,17 @@ INLINE Bool PWR_PVDLow(void) { return (PWR->CSR & B2) != 0; }
 INLINE void PWR_WKUPEnable(void) { PWR->CSR |= B8; }
 INLINE void PWR_WKUPDisable(void) { PWR->CSR &= ~B8; }
 
-// Enter standby mode
-void PWR_EnterStandby(void);
+// Enter sleep mode, use WFI wakeup
+void PWR_EnterSleep();
+
+// Enter sleep mode, use WFE wakeup
+void PWR_EnterSleepWfe();
+
+// Enter standby mode, use WFI wakeup
+void PWR_EnterStandby();
+
+// Enter standby mode, use WFE wakeup
+void PWR_EnterStandbyWfe();
 
 #ifdef __cplusplus
 }

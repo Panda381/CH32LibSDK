@@ -28,3 +28,4 @@
 #include INCLUDEC_SDK_FILE(sdk_systick.c)	// SysTick system counter
 #include INCLUDEC_SDK_FILE(sdk_tim.c)		// TIM
 #include INCLUDEC_SDK_FILE(sdk_usart.c)		// USART
+#include INCLUDEC_SDK_FILE(sdk_wdg.c)		// WDG

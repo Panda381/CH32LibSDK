@@ -169,7 +169,7 @@ int main(void)
 	while (True)
 	{
 		// wait for SysTick interrupt
-		PWR_EnterSleep(True);
+		PWR_EnterSleep();
 
 		// rolling the dice for minimal time 1.5 second after releasing
 		if ((u32)(Time() - PressTime) < 1500000*HCLK_PER_US)
@@ -190,8 +190,8 @@ int main(void)
 			GPIO_Mode(OUT3, GPIO_MODE_IN);
 			GPIO_Mode(OUT4, GPIO_MODE_IN);
 
-			// Enter standby mode (use_wfi: True=use WFI wakeup, False=use WFE wakeup)
-			PWR_EnterStandby(True);
+			// Enter standby mode, use WFI wakeup
+			PWR_EnterStandby();
 		}
 	}
 }

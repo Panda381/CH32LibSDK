@@ -93,11 +93,17 @@ INLINE void PWR_AWUCmp(int comp) { AWU->WR = (AWU->WR & ~PWR_AWUCMP_MAX) | comp;
 // Setup auto-wakeup prescaler compare PWR_AWUPSC_* (to divide LSI time base)
 INLINE void PWR_AWUPsc(int psc) { AWU->PSC = (AWU->PSC & ~PWR_AWUPSC_MASK) | psc; }
 
-// Enter sleep mode (use_wfi: True=use WFI wakeup, False=use WFE wakeup)
-void PWR_EnterSleep(Bool use_wfi);
+// Enter sleep mode, use WFI wakeup
+void PWR_EnterSleep();
 
-// Enter standby mode (use_wfi: True=use WFI wakeup, False=use WFE wakeup)
-void PWR_EnterStandby(Bool use_wfi);
+// Enter sleep mode, use WFE wakeup
+void PWR_EnterSleepWfe();
+
+// Enter standby mode, use WFI wakeup
+void PWR_EnterStandby();
+
+// Enter standby mode, use WFE wakeup
+void PWR_EnterStandbyWfe();
 
 #ifdef __cplusplus
 }

@@ -52,8 +52,8 @@ void SystemInit(void)
 	ResetReason = RCC->RSTSCKR;
 
 	// Delay about 2ms allowing access of the programming tool
-	int i;
-	for (i = 5000; i > 0; i--) nop();
+//	int i;
+//	for (i = 5000; i > 0; i--) nop();
 
 	// Initialize system clock to default configuration
 	RCC_ClockInit();

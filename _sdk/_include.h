@@ -32,5 +32,6 @@
 #include INCLUDE_SDK_FILE(sdk_systick.h)	// SysTick system counter
 #include INCLUDE_SDK_FILE(sdk_tim.h)		// TIM
 #include INCLUDE_SDK_FILE(sdk_usart.h)		// USART
+#include INCLUDE_SDK_FILE(sdk_wdg.h)		// WDG
 
 #endif // _SDK_INCLUDE_H

@@ -1,0 +1,10 @@
+#include "../include.h"
+
+// format: 1-bit pixel graphics RLE compressed
+// chunk length: 3 bits
+// compression: 94%
+// image width: 7 pixels
+// image height: 16 lines
+const u8 ImgCatAnim[16] = {
+	0x06, 0x0F, 0x61, 0x37, 0x56, 0x55, 0x57, 0x1C, 0x71, 0xC7, 0x14, 0x71, 0xC6, 0xDC, 0x71, 0x00, 
+};

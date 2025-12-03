@@ -1,6 +1,6 @@
 CH32LibSDK - SDK library for low-end CH32 RISC-V microcontrollers
 =================================================================
-Pre-alpha version 0.37, under development.
+Pre-alpha version 0.38, under development.
 
 Copyright (c) 2025 Miroslav Nemecek
 
@@ -661,6 +661,65 @@ power supply, and then start programming the processor within 5 seconds.
 >>> The source codes and all necessary Pianissimo documentation can be found in
 the CH32LibSDK library in the ch32\TOYS\Pianissimo folder.
 https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/Pianissimo <<<
+
+
+Pimitachi
+---------
+Pimitachi is a small pocket game in the style of Tamagotchi. In the game, you
+take care of a pet. The game includes an inexpensive 8-pin CH32V002J4M6
+processor, 3 buttons, a 0.96" I2C OLED display SSD1306 128x64 pixels (e.g.,
+this one
+https://www.hadex.cz/m508-displej-oled-096-128x64-znaku-iici2c-4piny-modry/ ),
+a piezo speaker, and a CR2032 battery. The design is very simple and suitable
+even for beginners.
+
+Pay attention to the pin layout on the display - there are usually two
+versions, with the pin order VCC-GND-SCL-SDA or GND-VDD-SCL-SDA. The printed
+circuit board has positions prepared for both types of displays. The firmware
+can be uploaded to the processor using the WCH-LinkE programmer (available,
+for example, here:
+https://pajenicko.cz/usb-programator-a-debug-adapter-wch-link). Before
+reprogramming a previously programmed processor, it is necessary to disconnect
+and reconnect the power supply for a moment so that the processor is not in
+standby mode. After uploading the firmware, the programming connector is no
+longer needed and can be removed. Instead of the connector, simply solder the
+3 wires from the programmer.
+
+Story: Pimitachi are the children of the inhabitants of the planet Pimitarya.
+The Pimitaryans like to leave the upbringing of their children to the
+inhabitants of other planets so that they receive a proper education. If you
+are selected as a suitable candidate for the role of nanny, they will bring you
+an egg of their offspring. A little Pimitachi will hatch from the egg. Take
+good care of it so that it is happy and healthy. After 4 days, the Pimitachi
+will transform, and the toddler will become a young Pimitaryan. When it reaches
+the age of 21 days, its parents will take it back. If you take poor care of
+your charge and it becomes sick or unhappy, its parents will take it back
+sooner.
+
+At the beginning of the game, you can choose the type of pet. There are 6
+options to choose from. After choosing the type, you can edit its name or leave
+the default name. The choice of type and name cannot be changed later. The home
+screen displays the pet's status - hunger, health, tiredness, happiness,
+cleanliness, and training. Press the 'A' key to access the menu where you can
+feed, cure, sleep, play with, clean, or teach your pet. Press the 'B' key on
+the main screen to turn the sound on or off. In the menu, you can view
+information about your pet - its name, age, and maximum age - i.e., the planned
+departure date. If you neglect your pet, its maximum age will be reduced and
+the parents will take it away sooner. In the information section, you can also
+view the status of your previous pets. The last item in the menu is the early
+return of the pet to its parents. You can then choose a new pet.
+
+If the game is not used for 30 seconds, it switches to low-power mode (20uA)
+with the display turned off. Even in this state, the game time continues to
+run. The current game status is saved to flash memory - both at the end of
+each day and when the game switches to low-power mode. So don't worry if the
+battery runs out - just replace the battery and continue playing. The status
+will be preserved even without the battery, only the time will not run
+without the battery.
+
+>>> The source codes and all necessary Pimitachi documentation can be found
+in the CH32LibSDK library in the ch32\TOYS\Pimitachi folder.
+https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/Pimitachi <<<
 
 
 - In the "_devices\<console>\diagram\" folders, you will find console schematic

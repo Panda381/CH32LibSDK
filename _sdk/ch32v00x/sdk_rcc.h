@@ -151,8 +151,8 @@ STATIC_ASSERT(sizeof(RCC_t) == 0x28, "Incorrect RCC_t!");
 #define RCC_HSE_LEVEL3		3	// HSE_LP=0: 1.3mA, HSE_LP=1: 1.5mA
 
 // Reset reason - copy of the RCC->RSTSCKR register on system start (check using RCC_RESETON_* flags)
-#define RCC_RESETON_WWD		B30	// Windows watchdog reset
-#define RCC_RESETON_IWD		B29	// Independent watchdog reset
+#define RCC_RESETON_WWDG	B30	// Windows watchdog reset
+#define RCC_RESETON_IWDG	B29	// Independent watchdog reset
 #define RCC_RESETON_SW		B28	// software reset
 #define RCC_RESETON_PWR		B27	// power-on reset
 #define RCC_RESETON_RST		B26	// manual reset on NRST pin

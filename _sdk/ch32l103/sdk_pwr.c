@@ -9,8 +9,8 @@
 
 #if USE_PWR		// 1=use power control
 
-// Enter sleep mode (use_wfi: True=use WFI wakeup, False=use WFE wakeup)
-void PWR_EnterSleep(Bool use_wfi)
+// Enter sleep mode, use WFI wakeup
+void PWR_EnterSleep()
 {
 	// select Sleep mode
 	PWR_PDDSSleep();
@@ -19,14 +19,24 @@ void PWR_EnterSleep(Bool use_wfi)
 	NVIC_Sleep();
 
 	// wait
-	if (use_wfi)
-		wfi_ins();
-	else
-		wfe();
+	wfi_ins();
 }
 
-// Enter standby mode (use_wfi: True=use WFI wakeup, False=use WFE wakeup)
-void PWR_EnterStandby(Bool use_wfi)
+// Enter sleep mode, use WFE wakeup
+void PWR_EnterSleepWfe()
+{
+	// select Sleep mode
+	PWR_PDDSSleep();
+
+	// set Sleep mode
+	NVIC_Sleep();
+
+	// wait
+	wfe();
+}
+
+// Enter standby mode, use WFI wakeup
+void PWR_EnterStandby()
 {
 	// select Standby mode
 	PWR_PDDSStandby();
@@ -35,10 +45,23 @@ void PWR_EnterStandby(Bool use_wfi)
 	NVIC_DeepSleep();
 
 	// wait
-	if (use_wfi)
-		wfi_ins();
-	else
-		wfe();
+	wfi_ins();
+
+	// return to normal mode
+	NVIC_Sleep();
+}
+
+// Enter standby mode, use WFE wakeup
+void PWR_EnterStandbyWfe()
+{
+	// select Standby mode
+	PWR_PDDSStandby();
+
+	// set DeepSleep mode
+	NVIC_DeepSleep();
+
+	// wait
+	wfe();
 
 	// return to normal mode
 	NVIC_Sleep();

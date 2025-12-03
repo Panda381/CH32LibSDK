@@ -308,4 +308,8 @@ STATIC_ASSERT(sizeof(u64) == 8, "Incorrect typedef u64!");
 #define USE_USART	1	// 1=use USART peripheral
 #endif
 
+#ifndef USE_WDG
+#define USE_WDG		1	// 1=use watchdog peripheral
+#endif
+
 #endif // _GLOBAL_H

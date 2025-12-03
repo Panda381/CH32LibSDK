@@ -53,7 +53,7 @@ void GPIO_Mode(int gpio, int mode)
 		shift = BIT(pin);	// pin mask for pull-up mode
 		if (mode == GPIO_MODE_IN_PD) shift <<= 16; // pin mask for pull-down mode
 		port->BSHR = shift;	// set pull mode
-	 }
+	}
 }
 
 // get current GPIO pin mode (returns GPIO_MODE_*; gpio = PA0...)
