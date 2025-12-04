@@ -19,11 +19,8 @@ void PetTick(Bool sleep)
 
 	// increase ticks and day
 	int ticks = PetTicks() + 1;
-	if (ticks >= TICKSDAY) // new day
+	if ((ticks == TICKSDAY/2) || (ticks >= TICKSDAY)) // new day (or half-day)
 	{
-		// reset ticks
-		ticks = 0;
-
 		// get current age and max
 		int age = PetAge();
 		int agemax = PetAgeMax();
@@ -38,9 +35,16 @@ void PetTick(Bool sleep)
 		if (agemax < age) agemax = age;
 		PetSetAgeMax(agemax);
 
-		// increase age
-		if (age > agemax) age = agemax;
-		PetSetAge(age);
+		// whole day
+		if (ticks >= TICKSDAY)
+		{
+			// reset ticks
+			ticks = 0;
+
+			// increase age
+			if (age > agemax) age = agemax;
+			PetSetAge(age);
+		}
 	}
 	PetSetTicks(ticks);
 	RamCrc();
@@ -106,7 +110,7 @@ void PetTick(Bool sleep)
 		}
 	}
 
-	// save RAM to flash, if age changed (to update flash only 1x per day)
-	if (PetAge() != FlashData.pet[0].state.age) SaveRamFlash();
+	// save RAM to flash, if age changed (to update flash only 1x or 2x per day)
+	if ((PetAge() != FlashData.pet[0].state.age) || (PetAgeMax() != FlashData.pet[0].state.agemax)) SaveRamFlash();
 }
 
