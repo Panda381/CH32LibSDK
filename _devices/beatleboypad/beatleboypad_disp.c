@@ -80,7 +80,7 @@ const u8 DispI2C_InitData[] = {
 	0xDA, 0x12,		// configure COM pins for a 128x64 screen
 				//	bit 4: 1=alternative COM pin configuration (default 1)
 				//	bit 5: 1=enable COM left/right remap (default 0)
-	0x81, 32, 		// set screen contrast (set 1 to 256, default value is 127)
+	0x81, 16, 		// set screen contrast (set 1 to 256, default value is 127)
 				//	Console consumption dependence on display contrast:
 				//	display in sleep mode ..... 0.0mA
 				//	0 ......................... 0.5mA (display is black)

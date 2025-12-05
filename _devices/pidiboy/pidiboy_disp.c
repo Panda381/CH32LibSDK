@@ -66,7 +66,7 @@ const u8 DispI2C_InitData[] = {
 	0xA1,			// invert segment mapping (orientation)
 	0xC8,			// reverse the scanning direction of COM lines
 	0xDA, 0x12,		// configure COM pins for a 128x64 screen
-	0x81, 0xCF,		// set screen contrast
+	0x81, 16,		// set screen contrast
 	0xD9, 0xF1,		// define the preload period
 	0xDB, 0x40,		// set VCOMH voltage
 	0x20, 0x00,		// set the memory mode to horizontal

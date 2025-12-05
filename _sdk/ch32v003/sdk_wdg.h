@@ -106,16 +106,16 @@ INLINE void WWDG_Enable(void) { WWDG->CTLR |= B7; }
 INLINE void WWDG_Disable(void) { WWDG->CTLR &= ~B7; }
 
 // Get/set WWDG counter 0..127 (reset if counter decrements from 64 to 63; default 127)
-INLINE u8 WWDG_GetCnt(void) { (u8)(WWDG->CTLR & 0x7f); }
+INLINE u8 WWDG_GetCnt(void) { return (u8)(WWDG->CTLR & 0x7f); }
 INLINE void WWDG_SetCnt(int cnt) { WWDG->CTLR = (WWDG->CTLR & ~0x7f) | cnt; }
 
 // Get/set WWDG window value 0..127 (default 127)
 // - Dog feeding can only be done when the value of the counter is less than the window value and greater than 63.
-INLINE u8 WWDG_GetWin(void) { (u8)(WWDG->CFGR & 0x7f); }
+INLINE u8 WWDG_GetWin(void) { return (u8)(WWDG->CFGR & 0x7f); }
 INLINE void WWDG_SetWin(int win) { WWDG->CFGR = (WWDG->CFGR & ~0x7f) | win; }
 
 // Get/set WWDG prescaler WWDG_PRESC_* (default WWDG_PRESC_1)
-INLINE u8 WWDG_GetPresc(void) { (u8)((WWDG->CFGR >> 7) & 3); }
+INLINE u8 WWDG_GetPresc(void) { return (u8)((WWDG->CFGR >> 7) & 3); }
 INLINE void WWDG_SetPresc(int presc) { WWDG->CFGR = (WWDG->CFGR & ~ (B7|B8)) | (presc << 7); }
 
 // Get/enable wake up interrupt enable bit (interrupt occurs when the value of the counter reaches 64)
