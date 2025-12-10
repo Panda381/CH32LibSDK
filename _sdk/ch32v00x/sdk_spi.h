@@ -16,19 +16,23 @@ extern "C" {
 
 // SPI registers
 typedef struct {
-	io32	CTLR1;		// 0x00: control register 1
-	io32	CTLR2;		// 0x04: control register 2
-	io32	STATR;		// 0x08: status register
+	io16	CTLR1;		// 0x00: control register 1
+	io16	res1;		// 0x02: ... reserved
+	io16	CTLR2;		// 0x04: control register 2
+	io16	res2;		// 0x06: ... reserved
+	io16	STATR;		// 0x08: status register
+	io16	res3;		// 0x0A: ... reserved
 	io16	DATAR;		// 0x0C: data register
-	io16	res1;		// 0x0E: ... reserved
+	io16	res4;		// 0x0E: ... reserved
 	io16	CRCR;		// 0x10: polynomial register
-	io16	res2;		// 0x12: ... reserved
+	io16	res5;		// 0x12: ... reserved
 	io16	RCRCR;		// 0x14: receive CRC register
-	io16	res3;		// 0x16: ... reserved
+	io16	res6;		// 0x16: ... reserved
 	io16	TCRCR;		// 0x18: transmit CRC register
-	io16	res4;		// 0x1A: ... reserved
-	io32	res5[2];	// 0x1C: ... reserved
-	io32	HSCR;		// 0x24: high-speed control register
+	io16	res7;		// 0x1A: ... reserved
+	io32	res8[2];	// 0x1C: ... reserved
+	io16	HSCR;		// 0x24: high-speed control register
+	io16	res9;		// 0x26: ... reserved
 } SPI_t;
 STATIC_ASSERT(sizeof(SPI_t) == 0x28, "Incorrect SPI_t!");
 #define SPI1	((SPI_t*)SPI1_BASE)	// 0x40013000
@@ -53,6 +57,7 @@ INLINE void SPIx_ClockPhaseSecond(SPI_t* spi) { spi->CTLR1 |= B0; }
 INLINE void SPI1_ClockPhaseSecond(void) { SPIx_ClockPhaseSecond(SPI1); }
 
 // Select clock polarity - held Low or High in idle state (default low; register CTLR1.CPOL)
+// Mode 0 or 1: set SCK to low; mode 2 and 3: set SCK to high
 INLINE void SPIx_ClockPolLow(SPI_t* spi) { spi->CTLR1 &= ~B1; }
 INLINE void SPI1_ClockPolLow(void) { SPIx_ClockPolLow(SPI1); }
 
@@ -67,6 +72,8 @@ INLINE void SPIx_Slave(SPI_t* spi) { spi->CTLR1 &= ~B2; }
 INLINE void SPI1_Slave(void) { SPIx_Slave(SPI1); }
 
 // Set Baut rate setting divider SPI_BAUD_DIV* (default 2; register CTLR1.BR[2:0])
+// This bit only applies when the HSRXEN bit is 0 (SPIx_HSDisable()).
+// When the HSRXEN bit is 1 (SPIx_HSEnable()), the SCK frequency is FHCLK/(baud+2).
 INLINE void SPIx_Baud(SPI_t* spi, int baud) { spi->CTLR1 = (spi->CTLR1 & ~(7 << 3)) | (baud << 3); }
 INLINE void SPI1_Baud(int baud) { SPIx_Baud(SPI1, baud); }
 
@@ -79,6 +86,7 @@ INLINE void SPI1_Disable(void) { SPIx_Disable(SPI1); }
 
 // Select first transmitted bit LSB or MSB (default MSB; register CTLR1.LSBFIRST)
 // LSB is only supported by SPI as host.
+// This bit cannot be modified during communication.
 INLINE void SPIx_LSB(SPI_t* spi) { spi->CTLR1 |= B7; }
 INLINE void SPI1_LSB(void) { SPIx_LSB(SPI1); }
 
@@ -86,6 +94,7 @@ INLINE void SPIx_MSB(SPI_t* spi) { spi->CTLR1 &= ~B7; }
 INLINE void SPI1_MSB(void) { SPIx_MSB(SPI1); }
 
 // Set level of NSS pin to Low or High (default low; register CTLR1.SSI)
+// Bit determines the level of the NSS pin, in case of software control SPIx_NSSSw().
 INLINE void SPIx_NSSLow(SPI_t* spi) { spi->CTLR1 &= ~B8; }
 INLINE void SPI1_NSSLow(void) { SPIx_NSSLow(SPI1); }
 
@@ -99,7 +108,7 @@ INLINE void SPI1_NSSSw(void) { SPIx_NSSSw(SPI1); }
 INLINE void SPIx_NSSHw(SPI_t* spi) { spi->CTLR1 &= ~B9; }
 INLINE void SPI1_NSSHw(void) { SPIx_NSSHw(SPI1); }
 
-// Set receive-only mode in 2-wire mode, or full-duplex mode (default full-duplex; register CTLR1.RXONLY)
+// Set receive-only mode in 2-wire mode (simplex mode), or full-duplex mode (default full-duplex; register CTLR1.RXONLY)
 INLINE void SPIx_RxOnly(SPI_t* spi) { spi->CTLR1 |= B10; }
 INLINE void SPI1_RxOnly(void) { SPIx_RxOnly(SPI1); }
 
@@ -121,7 +130,8 @@ INLINE void SPI1_CRCNextEnable(void) { SPIx_CRCNextEnable(SPI1); }
 INLINE void SPIx_CRCNextDisable(SPI_t* spi) { spi->CTLR1 &= ~B12; }
 INLINE void SPI1_CRCNextDisable(void) { SPIx_CRCNextDisable(SPI1); }
 
-// Enable/Disable hardware CRC (only in full-duplex mode; default disabled; register CTLR1.CRCEN)
+// Enable/Disable hardware CRC calculation (default disabled; register CTLR1.CRCEN)
+// Can only be written when SPE is 0 (SPIx_Disable()) and can only be used in full-duplex mode (SPIx_Duplex()).
 INLINE void SPIx_CRCEnable(SPI_t* spi) { spi->CTLR1 |= B13; }
 INLINE void SPI1_CRCEnable(void) { SPIx_CRCEnable(SPI1); }
 
@@ -228,7 +238,7 @@ INLINE Bool SPI1_Over(void) { return SPIx_Over(SPI1); }
 INLINE void SPIx_OverClr(SPI_t* spi) { spi->STATR &= ~B6; }
 INLINE void SPI1_OverClr(void) { SPIx_OverClr(SPI1); }
 
-// Check busy flag (register STATR.BSY)
+// Check busy flag - SPI is communicating, or the send buffer is not empty (register STATR.BSY)
 INLINE Bool SPIx_Busy(SPI_t* spi) { return (spi->STATR & B7) != 0; }
 INLINE Bool SPI1_Busy(void) { return SPIx_Busy(SPI1); }
 
@@ -266,6 +276,7 @@ INLINE u16 SPIx_TxCrc(SPI_t* spi) { return (u16)spi->TCRCR; }
 INLINE u16 SPI1_TxCrc(void) { return SPIx_TxCrc(SPI1); }
 
 // Enable/Disable high-speed mode, when clock is divided by 2 (default disabled; register HSCR.HSRXEN)
+// When the HSRXEN bit is 1 (SPIx_HSEnable()), the SCK frequency is FHCLK/(baud+2).
 INLINE void SPIx_HSEnable(SPI_t* spi) { spi->HSCR = B0; }
 INLINE void SPI1_HSEnable(void) { SPIx_HSEnable(SPI1); }
 

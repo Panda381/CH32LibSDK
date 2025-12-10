@@ -181,6 +181,10 @@ INLINE void GPIO_Remap1_3b(int pos, int map) { AFIO->PCFR1 = (AFIO->PCFR1 & ~(7 
 INLINE void GPIO_Remap1_4b(int pos, int map) { AFIO->PCFR1 = (AFIO->PCFR1 & ~(0x0f << pos)) | (map << pos); }
 
 // Remap SPI1 (default 0)
+//  Warning - modes 3 and 4 are not functional. At least for CH32V002A4M6, which does not have
+//  all signals connected. But it seems that it does not work with other CPUs either. According
+//  to the manufacturer's note, the pins are not connected to the SPI logic and therefore the CPU
+//  does not send the transmitted data. Apparently, simplex mode may be functional.
 //	0 ... PC1:CS, PC5:SCK, PC7:MISO, PC6:MOSI
 //	1 ... PC0:CS, PC5:SCK, PC7:MISO, PC6:MOSI
 //	2 ... PC4:CS, PD2:SCK, PB3:MISO, PD3:MOSI

@@ -1,6 +1,6 @@
 CH32LibSDK - SDK library for low-end CH32 RISC-V microcontrollers
 =================================================================
-Pre-alpha version 0.38, under development.
+Pre-alpha version 0.39, under development.
 
 Copyright (c) 2025 Miroslav Nemecek
 
@@ -720,6 +720,68 @@ without the battery.
 >>> The source codes and all necessary Pimitachi documentation can be found
 in the CH32LibSDK library in the ch32\TOYS\Pimitachi folder.
 https://github.com/Panda381/CH32LibSDK/tree/main/ch32/TOYS/Pimitachi <<<
+
+
+BabyBeat, BeatleBeat
+--------------------
+BabyBeat and BeatleBeat are stereo mini players for music files from SD cards.
+BabyBeat is a version with 5 buttons, a CH32V002A4M6 processor, powered by a
+1.5V AAA battery and a 3.3V voltage converter. BeatleBeat is a minimalist
+version with a CH32V002J4M6 processor and USB power supply with a 3.3V
+stabilizer. The power supply for the players is only an example; everyone can
+certainly adjust the power supply to their liking. Please note that although
+the processor can be operated at 5V, the SD card requires a voltage of 3.3V. If
+you notice interference (humming) with some SD cards, it can be reduced by
+increasing the capacitor capacity in the power supply. The default volume can
+be adjusted by changing resistors R1 and R2.
+
+The players only support WAV files in the IMA ADPCM 4-bit compression format,
+stereo, sample rate 22050 Hz (files should not contain metadata; example here:
+https://github.com/Panda381/CH32LibSDK/ch32/DEVICE/BabyBeat/SD_demo/OUT). The
+correct file format is not checked, but will result in faulty sound (noise and
+hum). I recommend using FFmpeg (https://www.ffmpeg.org/download.html) to
+convert files. For batch conversion, you can use the following BAT file, which
+will convert all MP3 tracks from the IN folder and save them to the OUT folder:
+
+@echo off
+del OUT\*.wav
+for %%f in (IN\*.mp3) do ffmpeg -i "%%f" -y -c:a adpcm_ima_wav -ar 22050 -ac 2 -map_metadata -1 "OUT\%%~nf.wav"
+
+Save the files to an SD card formatted to FAT32. The first album is stored in
+the root folder of the SD card. Additional albums are stored in subfolders.
+Albums in subfolders can only be used with the BabyBeat player. BeatleBeat only
+plays songs from the root folder. The order in which songs and albums are
+played is determined by the order in which they are saved on the SD card (songs
+are not sorted). For proper sorting, I recommend deleting old files on the SD
+card, removing the card, and reinserting it into the reader after a while, and
+only then copying the files to the card.
+
+BabyBeat control buttons:
+
+- PLAY/PAUSE ... Pause/resume playback.
+
+- NEXT ... A short press skips to the next track in the current album. From the
+  last track, it skips back to the first track of the album. Press and hold
+  (longer than 0.5 seconds) to move the playback forward by 10 seconds. Hold
+  further to skip further after 1 second.
+
+- PREV ... Press shortly to move playback to the previous track in the current
+  album. From the first track, it will skip to the last track in the album. A
+  long press (longer than 0.5 seconds) moves the playback back 10 seconds. Hold
+  further to skip further after 1 second.
+
+- VOL+, NEXT LIST - A short press increases the volume. A long press (longer
+  than 0.5 seconds) skips to the next album (to next folder).
+
+- VOL-, PREV LIST - A short press decreases the volume. A long press (longer
+  than 0.5 seconds) skips to the previous album (to previous folder).
+
+BeatleBeat has no control buttons. It plays all songs in the root folder of the
+SD disk sequentially.
+
+>>> The source codes and all necessary BabyBeat/BeatleBeat documentation can be
+found in the CH32LibSDK library in the ch32\DEVICE folder.
+https://github.com/Panda381/CH32LibSDK/tree/main/ch32/DEVICE <<<
 
 
 - In the "_devices\<console>\diagram\" folders, you will find console schematic

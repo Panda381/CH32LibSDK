@@ -8,12 +8,12 @@
 //	edge falling), clock phase: leading edge sample, trailing edge setup, 8 data bits
 
 // Define GPIOs:
-//#define SD_CS_GPIO	PD3	// CS output to SD card
+//#define SD_CS_GPIO	PD3	// CS output to SD card (does not need to be mapped in hardware, is handled by software)
 //#define SD_CLK_GPIO	PD4	// CLK output to SD card
 //#define SD_MISO_GPIO	PD5	// MISO input from SD card
 //#define SD_MOSI_GPIO	PD6	// MOSI output to SD card
 
-#if USE_SD		// 1=use software SD card driver, 2=use hardware SD card driver (0=no driver)
+#if USE_SD		// use SD card driver: 0=no, 1=software, 2=hardware (with software CS), 3=software with fast read
 
 #ifndef _LIB_SD_H
 #define _LIB_SD_H
@@ -21,37 +21,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/*
-// defaults - only to not report compilation error
-#ifndef SD_CS_GPIO
-#define SD_CS_GPIO	PA0	// CS output to SD card
-#endif
-
-#ifndef SD_CLK_GPIO
-#define SD_CLK_GPIO	PA1	// CLK output to SD card
-#endif
-
-#ifndef SD_MISO_GPIO
-#define SD_MISO_GPIO	PA2	// MISO input from SD card
-#endif
-
-#ifndef SD_MOSI_GPIO
-#define SD_MOSI_GPIO	PA3	// MOSI output to SD card
-#endif
-
-#ifndef SD_SPEED_INIT
-#define SD_SPEED_INIT	(HCLK_PER_US*2)	// SD speed on init: wait delay "HCLK_PER_US*2" = 250 kbps
-#endif
-
-#ifndef SD_SPEED_READ
-#define SD_SPEED_READ	(HCLK_PER_US/8)	// SD speed on read: wait delay "HCLK_PER_US/8" = 4 Mbps
-#endif
-
-#ifndef SD_SPEED_WRITE
-#define SD_SPEED_WRITE	(HCLK_PER_US/2)	// SD speed on read: wait delay "HCLK_PER_US/2" = 1 Mbps
-#endif
-*/
 
 // SD card type
 enum {
